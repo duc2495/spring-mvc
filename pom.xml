@@ -117,6 +117,15 @@
 			<version>9.4-1200-jdbc41</version>
 		</dependency>
 
+		<!-- Validator -->
+		<!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>SpringMVCEx1</finalName>

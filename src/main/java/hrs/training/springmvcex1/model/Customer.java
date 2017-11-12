@@ -1,25 +1,59 @@
 package hrs.training.springmvcex1.model;
 
+import java.util.List;
+
 public class Customer {
-	int custId;
+	
+	// form:hidden - hidden value
+	int id;
+	
+	// form:input - textbox
 	String name;
+	
+	// form:textarea - textarea
 	String address;
+	
+	// form:radiobutton - radio button
 	String sex;
+	
+	// form:input - textbox
 	String school;
-	int	year;
 	
+	// form:select - form:option - dropdown - single select
+	int year;
+	
+	// form:checkboxes - multiple checkboxes
+	List<String> subjects;
+
 	public Customer() {
-		
+
 	}
-	
-    public Customer(String name, String address, String sex, String school, int	year) {
-        this.name = name;
-        this.address = address;
-        this.sex = sex;
-        this.school = school;
-        this.year = year;
-    }
-    
+
+	public Customer(String name, String address, String sex, String school, int year, List<String> subjects) {
+		this.name = name;
+		this.address = address;
+		this.sex = sex;
+		this.school = school;
+		this.year = year;
+		this.subjects = subjects;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -52,21 +86,11 @@ public class Customer {
 		this.year = year;
 	}
 
-	public int getCustId() {
-		return custId;
+	public List<String> getSubjects() {
+		return subjects;
 	}
 
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setSubjects(List<String> subjects) {
+		this.subjects = subjects;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
 }

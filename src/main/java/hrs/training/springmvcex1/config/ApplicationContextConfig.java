@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
@@ -66,9 +67,18 @@ public class ApplicationContextConfig {
 
 		return dataSource;
 	}
-	
-    @Bean
-    public CustomerDAO getCustomerDAO() {
-        return new CustomerDAOImpl(getDataSource());
-    }
+
+	// Load property in message/validator.properties
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+		// Load property in message/validator.properties
+		rb.setBasenames(new String[] { "messages/validator" });
+		return rb;
+	}
+
+	@Bean
+	public CustomerDAO getCustomerDAO() {
+		return new CustomerDAOImpl(getDataSource());
+	}
 }
