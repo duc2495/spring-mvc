@@ -75,7 +75,7 @@
 						<form:errors path="subjects" class="control-label" />
 					</div>
 				</spring:bind>
-
+				
 				<button type="submit" class="btn btn-primary">Gửi</button>
 			</form:form>
 		</div>

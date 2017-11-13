@@ -8,14 +8,11 @@
 <title><tiles:getAsString name="title" /></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+<link href="<c:url value='/resources/css/bootstrap.min.css' />"
+	rel="stylesheet"></link>
+<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"></link>
+
 </head>
 
 <body>
@@ -23,6 +20,10 @@
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="body" />
 	<tiles:insertAttribute name="footer" />
+
+	<script src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.validate.min.js'/>"></script>
 
 </body>
 </html>

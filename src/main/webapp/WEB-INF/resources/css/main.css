@@ -1,0 +1,24 @@
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+	min-height: 5vh;
+}
+
+.content {
+	background-color: #f1f1f1;
+}
+
+/* Set gray background color */
+.text-left {
+	background-color: #ffffff;
+	min-height: 90vh;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+	background-color: #555;
+	color: white;
+	padding-top: 15px;
+	min-height: 5vh;
+}
