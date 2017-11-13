@@ -1,12 +1,13 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
+	background-color: rgb(103, 58, 183);
 	margin-bottom: 0;
 	border-radius: 0;
-	min-height: 5vh;
+	height: 5vh;
 }
 
 .content {
-	background-color: #f1f1f1;
+	background-color: #ede7f6;
 }
 
 /* Set gray background color */
@@ -17,8 +18,93 @@
 
 /* Set black background color, white text and some padding */
 footer {
-	background-color: #555;
+	background-color: rgb(103, 58, 183);
 	color: white;
 	padding-top: 15px;
-	min-height: 5vh;
+	height: 5vh;
+}
+
+/* Set survey page style */
+.checkbox input[type=checkbox], .radio input[type=radio] {
+	margin-left: 0px;
+}
+
+.survey-header {
+	background-color: rgb(103, 58, 183);
+	height: 15vh;
+	color: rgba(255, 255, 255, 1);
+}
+
+.survey-content {
+	margin-top: -10vh
+}
+
+.free-bg {
+	background-color: rgb(179, 136, 255);
+	height: 10px;
+	margin-left: -15;
+	margin-right: -15;
+}
+
+.red-label {
+	color: #db4437;
+	padding-right: 5px;
+}
+
+.checkbox label, .radio label {
+	padding-left: 30px;
+}
+
+.option-input {
+	-webkit-appearance: none;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	transition: all 0.15s ease-out 0s;
+	background: #cbd1d8;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	margin-right: 0.5rem;
+	outline: none;
+	z-index: 1000;
+}
+
+.option-input:hover {
+	background: #9faab7;
+}
+
+.option-input:checked {
+	background: #40e0d0;
+}
+
+.option-input:checked::before {
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	content: '✔';
+	display: inline-block;
+	font-size: 16px;
+	text-align: center;
+	line-height: 20px;
+	border: none;
+}
+
+.option-input:checked::after {
+	background: #40e0d0;
+	content: '';
+	display: block;
+	position: relative;
+	z-index: 100;
+}
+
+.option-input.radio {
+	border-radius: 50%;
+}
+
+.option-input.radio::after {
+	border-radius: 50%;
 }

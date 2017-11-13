@@ -4,11 +4,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="container-fluid text-center">
 	<div class="row content">
-		<div class="col-sm-2 sidenav"></div>
-		<div class="col-sm-8 text-left">
-			<h2>Phiếu điều tra</h2>
+		<div class="col-sm-4 sidenav"></div>
+		<div class="col-sm-4 text-left survey-content">
+			<div class="free-bg"></div>
+			<h2 class="text-center">Phiếu điều tra</h2>
+			<br> <br>
 			<p>Điều tra thông tin về sinh viên</p>
-			<p>* Bắt buộc</p>
+			<p class="red-label">* Bắt buộc</p>
 			<form:form action="saveSurvey" method="post"
 				modelAttribute="customerForm">
 
@@ -16,7 +18,8 @@
 
 				<spring:bind path="name">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class=control-label>Họ tên *:</label>
+						<label class="red-label">*</label> <label class=control-label>Họ
+							tên:</label>
 						<form:input path="name" type="text" class="form-control" id="name"
 							placeholder="Họ tên" />
 						<form:errors path="name" class="control-label" />
@@ -25,7 +28,8 @@
 
 				<spring:bind path="address">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class=control-label>Địa chỉ *:</label>
+						<label class="red-label">*</label><label class=control-label>Địa
+							chỉ:</label>
 						<form:textarea path="address" rows="4" class="form-control"
 							id="address" placeholder="Địa chỉ" />
 						<form:errors path="address" class="control-label" />
@@ -34,14 +38,15 @@
 
 				<spring:bind path="sex">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Giới tính *:</label>
+						<label class="red-label">*</label><label class="control-label">Giới
+							tính:</label>
 						<div class="radio">
 							<label class=control-label><form:radiobutton path="sex"
-									value="Nam" name="radio-sex" class="radio" />Nam</label>
+									value="Nam" name="radio-sex" class="option-input radio" />Nam</label>
 						</div>
 						<div class="radio">
 							<label class=control-label><form:radiobutton path="sex"
-									value="Nữ" name="radio-sex" class="radio" />Nữ</label>
+									value="Nữ" name="radio-sex" class="option-input radio" />Nữ</label>
 						</div>
 						<form:errors path="sex" class="control-label" />
 					</div>
@@ -49,7 +54,8 @@
 
 				<spring:bind path="school">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Trường học hiện tại *:</label>
+						<label class="red-label">*</label><label class="control-label">Trường
+							học hiện tại:</label>
 						<form:input path="school" type="text" class="form-control"
 							id="school" placeholder="Đại học bôn ba" />
 						<form:errors path="school" class="control-label" />
@@ -58,7 +64,8 @@
 
 				<spring:bind path="year">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Sinh viên năm thứ mấy *:</label>
+						<label class="red-label">*</label><label class="control-label">Sinh
+							viên năm thứ mấy:</label>
 						<form:select path="year" class="form-control">
 							<form:options items="${yearList}" />
 						</form:select>
@@ -68,17 +75,17 @@
 
 				<spring:bind path="subjects">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">Bạn đã từng học những môn học
-							nào *:</label>
+						<label class="red-label">*</label><label class="control-label">Bạn
+							đã từng học những môn học nào:</label>
 						<form:checkboxes element="span class='checkbox'" path="subjects"
 							items="${subjectList}" />
 						<form:errors path="subjects" class="control-label" />
 					</div>
 				</spring:bind>
-				
+
 				<button type="submit" class="btn btn-primary">Gửi</button>
 			</form:form>
 		</div>
-		<div class="col-sm-2 sidenav"></div>
+		<div class="col-sm-4 sidenav"></div>
 	</div>
 </div>

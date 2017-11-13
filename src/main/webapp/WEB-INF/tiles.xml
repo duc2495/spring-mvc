@@ -21,8 +21,8 @@
 	<!-- Survey Page -->
 	<definition name="surveyForm" extends="base.definition">
 		<put-attribute name="title" value="Survey Page" />
+		<put-attribute name="header" value="/WEB-INF/view/survey-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/survey-form.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/survey-footer.jsp" />
 	</definition>
 
 	<!-- Thanks Page -->
