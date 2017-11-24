@@ -30,9 +30,5 @@ public class CustomerValidator implements Validator {
 		if (customer.getYear() <= 0) {
 			errors.rejectValue("year", "Select.customer.year");
 		}
-		
-		if (customer.getSubjects() == null || customer.getSubjects().size() < 1) {
-			errors.rejectValue("subjects", "Select.customer.subjects");
-		}
 	}
 }

@@ -7,20 +7,18 @@
 	<div class="row content">
 		<div class="col-sm-2 sidenav"></div>
 		<div class="col-sm-8 text-left home-content">
-			<h1>Welcome</h1>
-
-			<h3>All Surveys</h3>
+			<h3>応答の一覧</h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>#ID</th>
-						<th>Họ tên</th>
-						<th>Ngày sinh</th>
-						<th>Địa chỉ</th>
-						<th>Giới tính</th>
-						<th>Trường học hiện tại</th>
-						<th>Năm thứ</th>
-						<th>Các môn đã học</th>
+						<th>名前</th>
+						<th>誕生日</th>
+						<th>アドレス</th>
+						<th>性別</th>
+						<th>学校</th>
+						<th>年生</th>
+						<th>科目</th>
 					</tr>
 				</thead>
 

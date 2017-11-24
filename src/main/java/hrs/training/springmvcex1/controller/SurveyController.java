@@ -81,20 +81,21 @@ public class SurveyController {
 	public void surveyDefaultModel(ModelAndView model) {
 
 		Map<Integer, String> years = new LinkedHashMap<Integer, String>();
-		years.put(0, "Lựa chọn");
-		years.put(1, "Năm thứ nhất");
-		years.put(2, "Năm thứ hai");
-		years.put(3, "Năm thứ ba");
-		years.put(4, "Năm thứ tư");
-		years.put(5, "Năm thứ năm");
-		years.put(6, "Năm thứ sáu");
+		years.put(0, "選択");
+		years.put(1, "一年生");
+		years.put(2, "二年生");
+		years.put(3, "三年生");
+		years.put(4, "四年生");
+		years.put(5, "五年生");
+		years.put(6, "六年生");
 		model.addObject("yearList", years);
 
 		Map<String, String> subjects = new LinkedHashMap<String, String>();
-		subjects.put("Tư tưởng", "Tư tưởng Hồ Chí Minh");
-		subjects.put("Đường lối", "Đường lối cách mạng của Đảng");
-		subjects.put("Triết", "Những nguyên lý của chủ nghĩa Mác Lê-nin");
-		subjects.put("Pháp luật", "Pháp luật đại cương");
+		subjects.put("化学", "化学");
+		subjects.put("教育学", "教育学");
+		subjects.put("英语", "英语");
+		subjects.put("数学", "数学");
+		subjects.put("物理", "物理");
 		model.addObject("subjectList", subjects);
 	}
 }

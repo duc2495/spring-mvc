@@ -14,13 +14,13 @@
 
 	<!-- Home Page -->
 	<definition name="homePage" extends="base.definition">
-		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="title" value="ホームページ" />
 		<put-attribute name="body" value="/WEB-INF/view/homepage.jsp" />
 	</definition>
 
 	<!-- Survey Page -->
 	<definition name="surveyForm" extends="base.definition">
-		<put-attribute name="title" value="Survey Page" />
+		<put-attribute name="title" value="アンケートページ" />
 		<put-attribute name="header" value="/WEB-INF/view/survey-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/survey-form.jsp" />
 		<put-attribute name="footer" value="" />
@@ -28,7 +28,7 @@
 
 	<!-- Thanks Page -->
 	<definition name="thankPage" extends="base.definition">
-		<put-attribute name="title" value="Thanks Page" />
+		<put-attribute name="title" value="ありがたい" />
 		<put-attribute name="header" value="/WEB-INF/view/survey-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/thanks-survey.jsp" />
 		<put-attribute name="footer" value="" />
@@ -36,9 +36,10 @@
 
 	<!-- Error Page -->
 	<definition name="errorPage" extends="base.definition">
-		<put-attribute name="title" value="Error Page" />
-		<put-attribute name="header" value="/WEB-INF/view/error-header.jsp" />
+		<put-attribute name="title" value="エラーページ" />
+		<put-attribute name="header" value="" />
 		<put-attribute name="body" value="/WEB-INF/view/error-body.jsp" />
+		<put-attribute name="footer" value="" />
 	</definition>
 
 
