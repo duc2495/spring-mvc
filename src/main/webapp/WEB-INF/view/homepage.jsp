@@ -6,7 +6,7 @@
 <div class="container-fluid text-center">
 	<div class="row content">
 		<div class="col-sm-2 sidenav"></div>
-		<div class="col-sm-8 text-left">
+		<div class="col-sm-8 text-left home-content">
 			<h1>Welcome</h1>
 
 			<h3>All Surveys</h3>
@@ -15,6 +15,7 @@
 					<tr>
 						<th>#ID</th>
 						<th>Họ tên</th>
+						<th>Ngày sinh</th>
 						<th>Địa chỉ</th>
 						<th>Giới tính</th>
 						<th>Trường học hiện tại</th>
@@ -27,6 +28,7 @@
 					<tr>
 						<td>${customer.id}</td>
 						<td>${customer.name}</td>
+						<td>${customer.birthday}</td>
 						<td>${customer.address}</td>
 						<td>${customer.sex}</td>
 						<td>${customer.school}</td>

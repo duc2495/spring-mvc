@@ -23,12 +23,15 @@
 		<put-attribute name="title" value="Survey Page" />
 		<put-attribute name="header" value="/WEB-INF/view/survey-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/survey-form.jsp" />
+		<put-attribute name="footer" value="" />
 	</definition>
 
 	<!-- Thanks Page -->
 	<definition name="thankPage" extends="base.definition">
 		<put-attribute name="title" value="Thanks Page" />
-		<put-attribute name="body" value="/WEB-INF/view/thanks-body.jsp" />
+		<put-attribute name="header" value="/WEB-INF/view/survey-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/thanks-survey.jsp" />
+		<put-attribute name="footer" value="" />
 	</definition>
 
 	<!-- Error Page -->

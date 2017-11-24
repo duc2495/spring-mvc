@@ -1,26 +1,33 @@
 package hrs.training.springmvcex1.model;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Customer {
 	
 	// form:hidden - hidden value
-	int id;
+	private int id;
 	
 	// form:input - textbox
-	String name;
+	private String name;
 	
+	// form:input - textbox
+	@DateTimeFormat(pattern="yyyy-mm-dd") 
+	private Date birthday;
+
 	// form:textarea - textarea
-	String address;
+	private String address;
 	
 	// form:radiobutton - radio button
-	String sex;
+	private String sex;
 	
 	// form:input - textbox
-	String school;
+	private String school;
 	
 	// form:select - form:option - dropdown - single select
-	int year;
+	private int year;
 	
 	// form:checkboxes - multiple checkboxes
 	List<String> subjects;
@@ -29,8 +36,9 @@ public class Customer {
 
 	}
 
-	public Customer(String name, String address, String sex, String school, int year, List<String> subjects) {
+	public Customer(String name, Date birthday, String address, String sex, String school, int year, List<String> subjects) {
 		this.name = name;
+		this.birthday = birthday;
 		this.address = address;
 		this.sex = sex;
 		this.school = school;
@@ -52,6 +60,14 @@ public class Customer {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getAddress() {

@@ -8,7 +8,7 @@
 		<div class="col-sm-4 text-left survey-content">
 			<div class="free-bg"></div>
 			<h2 class="text-center">Phiếu điều tra</h2>
-			<br> <br>
+			<br>
 			<p>Điều tra thông tin về sinh viên</p>
 			<p class="red-label">* Bắt buộc</p>
 			<form:form action="saveSurvey" method="post"
@@ -23,6 +23,15 @@
 						<form:input path="name" type="text" class="form-control" id="name"
 							placeholder="Họ tên" />
 						<form:errors path="name" class="control-label" />
+					</div>
+				</spring:bind>
+
+				<spring:bind path="birthday">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="red-label">*</label><label class=control-label>Ngày
+							sinh</label>
+						<form:input path="birthday" type="date" class="form-control" />
+						<form:errors path="birthday" class="control-label" />
 					</div>
 				</spring:bind>
 
@@ -83,8 +92,9 @@
 					</div>
 				</spring:bind>
 
-				<button type="submit" class="btn btn-primary">Gửi</button>
+				<button type="submit" class="btn btn-primary button">Gửi</button>
 			</form:form>
+			
 		</div>
 		<div class="col-sm-4 sidenav"></div>
 	</div>

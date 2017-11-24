@@ -1,27 +1,32 @@
+body {
+	background-color: #ede7f6;
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	background-color: rgb(103, 58, 183);
 	margin-bottom: 0;
 	border-radius: 0;
-	height: 5vh;
+	height: 5%;
 }
 
-.content {
-	background-color: #ede7f6;
-}
-
-/* Set gray background color */
+/* Set background color */
 .text-left {
 	background-color: #ffffff;
-	min-height: 90vh;
 }
 
-/* Set black background color, white text and some padding */
+/* Set background color */
+.survey-content {
+	margin-top: -5%;
+	margin-bottom: 5%;
+	padding-bottom: 20px;
+}
+
 footer {
 	background-color: rgb(103, 58, 183);
 	color: white;
 	padding-top: 15px;
-	height: 5vh;
+	height: 5%;
 }
 
 /* Set survey page style */
@@ -31,12 +36,8 @@ footer {
 
 .survey-header {
 	background-color: rgb(103, 58, 183);
-	height: 15vh;
+	height: 25%;
 	color: rgba(255, 255, 255, 1);
-}
-
-.survey-content {
-	margin-top: -10vh
 }
 
 .free-bg {
@@ -107,4 +108,15 @@ footer {
 
 .option-input.radio::after {
 	border-radius: 50%;
+}
+
+.button {
+	padding-left: 25px;
+	padding-right: 25px;
+	display: block;
+	margin: 0 auto;
+}
+
+.home-content {
+	height: 90%;
 }

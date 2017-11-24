@@ -22,6 +22,7 @@ public class CustomerValidator implements Validator {
 		// Kiểm tra các field của Customer.
 		// (Xem thêm file property: messages/validator.property)
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.customer.name");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthday", "NotEmpty.customer.birthday");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.customer.address");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sex", "NotEmpty.customer.sex");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "school", "NotEmpty.customer.school");
