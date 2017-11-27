@@ -7,7 +7,7 @@ body {
 	background-color: rgb(103, 58, 183);
 	margin-bottom: 0;
 	border-radius: 0;
-	height: 5%;
+	min-height: 5%;
 }
 
 .text-left {
@@ -18,7 +18,7 @@ footer {
 	background-color: rgb(103, 58, 183);
 	color: white;
 	padding-top: 15px;
-	height: 5%;
+	min-height: 5%;
 }
 /* End of set default page style */
 .survey-content {
@@ -28,7 +28,7 @@ footer {
 }
 /* Set home page style */
 .home-content {
-	height: 90%;
+	min-height: 90%;
 }
 /* End of set home page style */
 
