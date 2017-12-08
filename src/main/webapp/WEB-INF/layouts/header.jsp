@@ -8,14 +8,12 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">HRソリューション</a>
+			<a class="navbar-brand" href="homepage">HRソリューション</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="homepage">ホーム</a></li>
 				<li><a href="newSurvey">アンケート</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">About</a></li>
 			</ul>
 		</div>
 	</div>

@@ -30,17 +30,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void insert(Customer customer) {
-		String sql = "INSERT INTO surveydb.customer (name, birthday, address, sex, school, year, subjects)"
-				+ "VALUES ( :name, :birthday, :address, :sex, :school, :year, :subjects)";
+		String sql = "INSERT INTO Customer (name, birthday, address, gender, school, school_year, languages)"
+				+ "VALUES ( :name, :birthday, :address, :gender, :school, :schoolYear, :languages)";
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(customer));
 	}
 
 	@Override
-	public Customer findByCustomerId(int custId) {
+	public Customer findByCustomerId(int id) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", custId);
+		params.put("id", id);
 
-		String sql = "SELECT * FROM surveydb.customer WHERE id=:id";
+		String sql = "SELECT * FROM Customer WHERE customer_id=:id";
 
 		Customer result = null;
 		try {
@@ -53,7 +53,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public List<Customer> list() {
-		String sql = "SELECT * FROM surveydb.customer";
+		String sql = "SELECT * FROM Customer";
 		List<Customer> listCustomer = namedParameterJdbcTemplate.query(sql, new CustomerMapper());
 		return listCustomer;
 	}
@@ -65,10 +65,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		paramSource.addValue("name", customer.getName());
 		paramSource.addValue("birthday", customer.getBirthday());
 		paramSource.addValue("address", customer.getAddress());
-		paramSource.addValue("sex", customer.getSex());
+		paramSource.addValue("gender", customer.getGender());
 		paramSource.addValue("school", customer.getSchool());
-		paramSource.addValue("year", customer.getYear());
-		paramSource.addValue("subjects", convertListToDelimitedString(customer.getSubjects()));
+		paramSource.addValue("schoolYear", customer.getSchoolYear());
+		paramSource.addValue("languages", convertListToDelimitedString(customer.getLanguages()));
 
 		return paramSource;
 	}
@@ -77,14 +77,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Customer aCustomer = new Customer();
-			aCustomer.setId(rs.getInt("id"));
+			aCustomer.setId(rs.getInt("customer_id"));
 			aCustomer.setName(rs.getString("name"));
 			aCustomer.setBirthday(rs.getDate("birthday"));
 			aCustomer.setAddress(rs.getString("address"));
-			aCustomer.setSex(rs.getString("sex"));
+			aCustomer.setGender(rs.getString("gender"));
 			aCustomer.setSchool(rs.getString("school"));
-			aCustomer.setYear(rs.getInt("year"));
-			aCustomer.setSubjects(convertDelimitedStringToList(rs.getString("subjects")));
+			aCustomer.setSchoolYear(rs.getInt("school_year"));
+			aCustomer.setLanguages(convertDelimitedStringToList(rs.getString("languages")));
 			return aCustomer;
 		}
 	}

@@ -42,18 +42,18 @@
 					</div>
 				</spring:bind>
 
-				<spring:bind path="sex">
+				<spring:bind path="gender">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="red-label">*</label><label class="control-label">性別</label>
 						<div class="radio">
-							<label class=control-label><form:radiobutton path="sex"
-									value="男性" name="radio-sex" class="option-input radio" />男性</label>
+							<label class=control-label><form:radiobutton path="gender"
+									value="男性" name="radio-gender" class="option-input radio" />男性</label>
 						</div>
 						<div class="radio">
-							<label class=control-label><form:radiobutton path="sex"
-									value="女性" name="radio-sex" class="option-input radio" />女性</label>
+							<label class=control-label><form:radiobutton path="gender"
+									value="女性" name="radio-gender" class="option-input radio" />女性</label>
 						</div>
-						<form:errors path="sex" class="control-label" />
+						<form:errors path="gender" class="control-label" />
 					</div>
 				</spring:bind>
 
@@ -66,22 +66,22 @@
 					</div>
 				</spring:bind>
 
-				<spring:bind path="year">
+				<spring:bind path="schoolYear">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="red-label">*</label><label class="control-label">年生</label>
-						<form:select path="year" class="form-control">
-							<form:options items="${yearList}" />
+						<form:select path="schoolYear" class="form-control">
+							<form:options items="${schoolYearList}" />
 						</form:select>
-						<form:errors path="year" class="control-label" />
+						<form:errors path="schoolYear" class="control-label" />
 					</div>
 				</spring:bind>
 
-				<spring:bind path="subjects">
+				<spring:bind path="languages">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">勉強した科目</label>
-						<form:checkboxes element="span class='checkbox'" path="subjects"
-							items="${subjectList}" />
-						<form:errors path="subjects" class="control-label" />
+						<label class="control-label">外国語スキル</label>
+						<form:checkboxes element="span class='checkbox'" path="languages"
+							items="${languageList}" />
+						<form:errors path="languages" class="control-label" />
 					</div>
 				</spring:bind>
 

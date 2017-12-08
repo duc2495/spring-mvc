@@ -9,10 +9,10 @@
 		<div class="col-sm-4 sidenav"></div>
 		<div class="col-sm-4 text-left survey-content">
 			<div class="free-bg"></div>
-			<h2 class="text-center">Phiếu điều tra</h2>
+			<h2 class="text-center">大学生の情報について調査します。</h2>
 			<br><br>
-			<p>Câu trả lời của bạn đã được ghi lại.</p>
-			<a href="newSurvey">Gửi phản hồi khác.</a>
+			<p>回答を記録しました。</p>
+			<a href="newSurvey">別の回答を送信</a>
 		</div>
 		<div class="col-sm-4 sidenav"></div>
 	</div>

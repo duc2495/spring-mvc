@@ -21,29 +21,29 @@ public class Customer {
 	private String address;
 	
 	// form:radiobutton - radio button
-	private String sex;
+	private String gender;
 	
 	// form:input - textbox
 	private String school;
 	
 	// form:select - form:option - dropdown - single select
-	private int year;
+	private int schoolYear;
 	
 	// form:checkboxes - multiple checkboxes
-	List<String> subjects;
+	List<String> languages;
 
 	public Customer() {
 
 	}
 
-	public Customer(String name, Date birthday, String address, String sex, String school, int year, List<String> subjects) {
+	public Customer(String name, Date birthday, String address, String gender, String school, int schoolYear, List<String> languages) {
 		this.name = name;
 		this.birthday = birthday;
 		this.address = address;
-		this.sex = sex;
+		this.gender = gender;
 		this.school = school;
-		this.year = year;
-		this.subjects = subjects;
+		this.schoolYear = schoolYear;
+		this.languages = languages;
 	}
 
 	public int getId() {
@@ -78,12 +78,12 @@ public class Customer {
 		this.address = address;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getSchool() {
@@ -94,19 +94,19 @@ public class Customer {
 		this.school = school;
 	}
 
-	public int getYear() {
-		return year;
+	public int getSchoolYear() {
+		return schoolYear;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setSchoolYear(int schoolYear) {
+		this.schoolYear = schoolYear;
 	}
 
-	public List<String> getSubjects() {
-		return subjects;
+	public List<String> getLanguages() {
+		return languages;
 	}
 
-	public void setSubjects(List<String> subjects) {
-		this.subjects = subjects;
+	public void setLanguages(List<String> languages) {
+		this.languages = languages;
 	}
 }

@@ -1,0 +1,6 @@
+# DataSource
+ 
+ds.database-driver=org.postgresql.Driver
+ds.url=jdbc:postgresql://survey-postgres:5432/hrs-training
+ds.username=duc2495
+ds.password=duc2495

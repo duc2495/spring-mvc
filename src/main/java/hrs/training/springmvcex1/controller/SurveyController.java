@@ -80,22 +80,22 @@ public class SurveyController {
 
 	public void surveyDefaultModel(ModelAndView model) {
 
-		Map<Integer, String> years = new LinkedHashMap<Integer, String>();
-		years.put(0, "選択");
-		years.put(1, "一年生");
-		years.put(2, "二年生");
-		years.put(3, "三年生");
-		years.put(4, "四年生");
-		years.put(5, "五年生");
-		years.put(6, "六年生");
-		model.addObject("yearList", years);
+		Map<Integer, String> schoolYearList = new LinkedHashMap<Integer, String>();
+		schoolYearList.put(0, "選択");
+		schoolYearList.put(1, "一年生");
+		schoolYearList.put(2, "二年生");
+		schoolYearList.put(3, "三年生");
+		schoolYearList.put(4, "四年生");
+		schoolYearList.put(5, "五年生");
+		schoolYearList.put(6, "六年生");
+		model.addObject("schoolYearList", schoolYearList);
 
-		Map<String, String> subjects = new LinkedHashMap<String, String>();
-		subjects.put("化学", "化学");
-		subjects.put("教育学", "教育学");
-		subjects.put("英语", "英语");
-		subjects.put("数学", "数学");
-		subjects.put("物理", "物理");
-		model.addObject("subjectList", subjects);
+		Map<String, String> languageList = new LinkedHashMap<String, String>();
+		languageList.put("中国語", "中国語");
+		languageList.put("英語", "英語");
+		languageList.put("韓国語", "韓国語");
+		languageList.put("ベトナム語", "ベトナム語");
+		languageList.put("フランス語", "フランス語");
+		model.addObject("languageList", languageList);
 	}
 }

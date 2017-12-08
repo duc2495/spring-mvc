@@ -24,11 +24,24 @@ public class CustomerValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.customer.name");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthday", "NotEmpty.customer.birthday");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.customer.address");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sex", "NotEmpty.customer.sex");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.customer.gender");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "school", "NotEmpty.customer.school");
 
-		if (customer.getYear() <= 0) {
-			errors.rejectValue("year", "Select.customer.year");
+		if (customer.getSchoolYear() <= 0 || customer.getSchoolYear() > 6) {
+			errors.rejectValue("schoolYear", "Select.customer.schoolYear");
 		}
+
+		if (customer.getName().length() > 100) {
+			errors.rejectValue("name", "TooLong.customer.name");
+		}
+
+		if (customer.getAddress().length() > 100) {
+			errors.rejectValue("address", "TooLong.customer.address");
+		}
+
+		if (customer.getSchool().length() > 100) {
+			errors.rejectValue("school", "TooLong.customer.school");
+		}
+
 	}
 }
