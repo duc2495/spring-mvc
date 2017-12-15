@@ -30,8 +30,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void insert(Customer customer) {
-		String sql1 = "INSERT INTO Customer (name, birthday, address, gender, school, school_year)"
-				+ "VALUES ( :name, :birthday, :address, :gender, :school, :schoolYear)";
+		customer.setId(this.getNextId());
+		System.out.println(customer.getId());
+		String sql1 = "INSERT INTO Customer (customer_id, name, birthday, address, gender, school, school_year)"
+				+ "VALUES (:id, :name, :birthday, :address, :gender, :school, :schoolYear)";
 		namedParameterJdbcTemplate.update(sql1, getCustomerParameter(customer));
 		if (!customer.getLanguages().isEmpty()) {
 			String sql2 = "INSERT INTO Customer_Language (customer_id, language_id)"
@@ -66,7 +68,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SqlParameterSource getCustomerParameter(Customer customer) {
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("id", this.getNextId());
+		paramSource.addValue("id", customer.getId());
 		paramSource.addValue("name", customer.getName());
 		paramSource.addValue("birthday", customer.getBirthday());
 		paramSource.addValue("address", customer.getAddress());
@@ -83,6 +85,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		for (int i = 0; i < customer.getLanguages().size(); i++) {
 			paramSource.addValue("customer_id", customer.getId());
 			paramSource.addValue("language_id", customer.getLanguages().get(i).getId());
+			System.out.println(customer.getLanguages().get(i).getId());
 		}
 
 		return paramSource;
