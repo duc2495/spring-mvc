@@ -26,6 +26,12 @@
 		<put-attribute name="footer" value="" />
 	</definition>
 
+	<!-- View Survey Page -->
+	<definition name="viewSurveys" extends="base.definition">
+		<put-attribute name="title" value="アンケートページ" />
+		<put-attribute name="body" value="/WEB-INF/view/viewsurveys.jsp" />
+	</definition>
+
 	<!-- Thanks Page -->
 	<definition name="thankPage" extends="base.definition">
 		<put-attribute name="title" value="ありがたい" />

@@ -12,15 +12,19 @@ import hrs.training.springmvcex1.model.Customer;
 import hrs.training.springmvcex1.service.CustomerService;
 
 @Controller
-public class HomeController {
+public class ViewSurveys {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping(value = { "/", "/homepage" })
-	public ModelAndView listCustomer(ModelAndView model) throws IOException {
-		List<Customer> listCustomer = customerService.listAll();
+	@RequestMapping(value = { "/viewsurveys" })
+	public ModelAndView listCustomer(ModelAndView model, Integer offset) throws IOException {
+
+		Integer maxResult = 15;
+		List<Customer> listCustomer = customerService.getCustomersByPage(offset, maxResult);
 		model.addObject("listCustomer", listCustomer);
-		model.setViewName("homePage");
+		model.addObject("count", customerService.count());
+		model.addObject("offset", offset);
+		model.setViewName("viewSurveys");
 		return model;
 	}
 }

@@ -29,7 +29,17 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	@Override
-	public List<Customer> list(){
-		return custDao.list();
+	public List<Customer> listAll(){
+		return custDao.listAll();
+	}
+
+	@Override
+	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {
+		return custDao.getCustomersByPage(offset, maxResult);
+	}
+
+	@Override
+	public Long count() {
+		return custDao.count();
 	}
 }

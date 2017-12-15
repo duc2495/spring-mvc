@@ -13,7 +13,8 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="homepage">ホーム</a></li>
-				<li><a href="newSurvey">アンケート</a></li>
+				<li><a href="viewsurveys">アンケートリスト</a></li>
+				<li><a href="newSurvey">新しいアンケート</a></li>
 			</ul>
 		</div>
 	</div>

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,9 +24,11 @@ import hrs.training.springmvcex1.model.Customer;
 public class CustomerDAOImpl implements CustomerDAO {
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	public CustomerDAOImpl(DataSource dataSource) {
-		namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<Customer> list() {
+	public List<Customer> listAll() {
 		String sql = "SELECT * FROM Customer";
 		List<Customer> listCustomer = namedParameterJdbcTemplate.query(sql, new CustomerMapper());
 		return listCustomer;
@@ -71,6 +74,22 @@ public class CustomerDAOImpl implements CustomerDAO {
 		paramSource.addValue("languages", convertListToDelimitedString(customer.getLanguages()));
 
 		return paramSource;
+	}
+
+	@Override
+	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {
+		if (offset == null) {
+			offset = 0;
+		}
+		String sql = "SELECT * FROM Customer LIMIT " + maxResult + " OFFSET " + offset;
+		List<Customer> listCustomer = namedParameterJdbcTemplate.query(sql, new CustomerMapper());
+		return listCustomer;
+	}
+
+	@Override
+	public Long count() {
+		String sql = "SELECT count(*) FROM Customer";
+		return jdbcTemplate.queryForObject(sql, new Object[] {}, Long.class);
 	}
 
 	private static final class CustomerMapper implements RowMapper<Customer> {

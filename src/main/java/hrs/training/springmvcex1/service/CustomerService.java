@@ -13,5 +13,9 @@ public interface CustomerService {
 
 	Customer findByCustomerId(int custId);
 
-	List<Customer> list();
+	List<Customer> listAll();
+	
+	List<Customer> getCustomersByPage(Integer offset, Integer maxResult);
+	
+	Long count();
 }

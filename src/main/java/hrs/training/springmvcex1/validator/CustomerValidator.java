@@ -1,5 +1,7 @@
 package hrs.training.springmvcex1.validator;
 
+import java.util.regex.Pattern;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -31,7 +33,7 @@ public class CustomerValidator implements Validator {
 			errors.rejectValue("schoolYear", "Select.customer.schoolYear");
 		}
 
-		if (customer.getName().length() > 100) {
+		if (customer.getName().length() > 30) {
 			errors.rejectValue("name", "TooLong.customer.name");
 		}
 
@@ -43,5 +45,20 @@ public class CustomerValidator implements Validator {
 			errors.rejectValue("school", "TooLong.customer.school");
 		}
 
+		String nameRegex = "[^ ]([\\u3000-\\u303F ]*|" + "[\\u3040-\\u309F ]*|" + "[\\u30A0-\\u30FF ]*|"
+				+ "[\\uFF00-\\uFFEF ]*|" + "[\\u4E00-\\u9FAF ]*|" + "[a-zA-Z ]*)";
+
+		if(!Pattern.matches(nameRegex, customer.getName())) {
+			errors.rejectValue("name", "NotMatch.customer.name");
+		}
+		String contentRegex = "[^ ]([\\u0022-\\u005C &\\u3000-\\u303F &\\u3040-\\u309F &\\u30A0-\\u30FF &\\uFF00-\\uFFEF &\\u4E00-\\u9FAF &a-zA-Z ]*)";
+		
+		if(!Pattern.matches(contentRegex, customer.getAddress())) {
+			errors.rejectValue("address", "NotMatch.customer.address");
+		}
+		
+		if(!Pattern.matches(contentRegex, customer.getSchool())) {
+			errors.rejectValue("school", "NotMatch.customer.school");
+		}
 	}
 }
