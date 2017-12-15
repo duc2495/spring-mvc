@@ -30,13 +30,13 @@ public class Customer {
 	private int schoolYear;
 	
 	// form:checkboxes - multiple checkboxes
-	List<String> languages;
+	List<Language> languages;
 
 	public Customer() {
 
 	}
 
-	public Customer(String name, Date birthday, String address, String gender, String school, int schoolYear, List<String> languages) {
+	public Customer(String name, Date birthday, String address, String gender, String school, int schoolYear, List<Language> languages) {
 		this.name = name;
 		this.birthday = birthday;
 		this.address = address;
@@ -102,11 +102,11 @@ public class Customer {
 		this.schoolYear = schoolYear;
 	}
 
-	public List<String> getLanguages() {
+	public List<Language> getLanguages() {
 		return languages;
 	}
 
-	public void setLanguages(List<String> languages) {
+	public void setLanguages(List<Language> languages) {
 		this.languages = languages;
 	}
 }

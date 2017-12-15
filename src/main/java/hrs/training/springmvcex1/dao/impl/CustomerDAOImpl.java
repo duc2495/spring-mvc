@@ -2,8 +2,6 @@ package hrs.training.springmvcex1.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +14,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.util.StringUtils;
 
 import hrs.training.springmvcex1.dao.CustomerDAO;
 import hrs.training.springmvcex1.model.Customer;
@@ -33,9 +30,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void insert(Customer customer) {
-		String sql = "INSERT INTO Customer (name, birthday, address, gender, school, school_year, languages)"
-				+ "VALUES ( :name, :birthday, :address, :gender, :school, :schoolYear, :languages)";
-		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(customer));
+		String sql1 = "INSERT INTO Customer (name, birthday, address, gender, school, school_year)"
+				+ "VALUES ( :name, :birthday, :address, :gender, :school, :schoolYear)";
+		namedParameterJdbcTemplate.update(sql1, getCustomerParameter(customer));
+		if (!customer.getLanguages().isEmpty()) {
+			String sql2 = "INSERT INTO Customer_Language (customer_id, language_id)"
+					+ "VALUES ( :customer_id, :language_id)";
+			namedParameterJdbcTemplate.update(sql2, getCustomerLanguageParameter(customer));
+		}
 	}
 
 	@Override
@@ -61,17 +63,27 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return listCustomer;
 	}
 
-	private SqlParameterSource getSqlParameterByModel(Customer customer) {
+	private SqlParameterSource getCustomerParameter(Customer customer) {
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		// paramSource.addValue("id", customer.getId());
+		paramSource.addValue("id", this.getNextId());
 		paramSource.addValue("name", customer.getName());
 		paramSource.addValue("birthday", customer.getBirthday());
 		paramSource.addValue("address", customer.getAddress());
 		paramSource.addValue("gender", customer.getGender());
 		paramSource.addValue("school", customer.getSchool());
 		paramSource.addValue("schoolYear", customer.getSchoolYear());
-		paramSource.addValue("languages", convertListToDelimitedString(customer.getLanguages()));
+
+		return paramSource;
+	}
+
+	private SqlParameterSource getCustomerLanguageParameter(Customer customer) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("languages", customer.getLanguages());
+		for (int i = 0; i < customer.getLanguages().size(); i++) {
+			paramSource.addValue("customer_id", customer.getId());
+			paramSource.addValue("language_id", customer.getLanguages().get(i).getId());
+		}
 
 		return paramSource;
 	}
@@ -103,30 +115,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 			aCustomer.setGender(rs.getString("gender"));
 			aCustomer.setSchool(rs.getString("school"));
 			aCustomer.setSchoolYear(rs.getInt("school_year"));
-			aCustomer.setLanguages(convertDelimitedStringToList(rs.getString("languages")));
 			return aCustomer;
 		}
 	}
 
-	private static List<String> convertDelimitedStringToList(String delimitedString) {
-
-		List<String> result = new ArrayList<String>();
-
-		if (!StringUtils.isEmpty(delimitedString)) {
-			result = Arrays.asList(StringUtils.delimitedListToStringArray(delimitedString, ","));
-		}
-		return result;
-
-	}
-
-	private String convertListToDelimitedString(List<String> list) {
-
-		String result = "";
-		if (list != null) {
-			result = StringUtils.arrayToCommaDelimitedString(list.toArray());
-		}
-		return result;
-
+	@Override
+	public Integer getNextId() {
+		String sql = "Select nextval(pg_get_serial_sequence('customer', 'customer_id'))";
+		return jdbcTemplate.queryForObject(sql, new Object[] {}, Integer.class);
 	}
 
 }

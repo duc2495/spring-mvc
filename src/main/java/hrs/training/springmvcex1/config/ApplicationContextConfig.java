@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -18,7 +19,9 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import hrs.training.springmvcex1.dao.CustomerDAO;
+import hrs.training.springmvcex1.dao.LanguageDAO;
 import hrs.training.springmvcex1.dao.impl.CustomerDAOImpl;
+import hrs.training.springmvcex1.dao.impl.LanguageDAOImpl;
 
 @Configuration
 @ComponentScan("hrs.training.springmvcex1.*")
@@ -68,6 +71,13 @@ public class ApplicationContextConfig {
 		return dataSource;
 	}
 
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+		DataSourceTransactionManager tm = new DataSourceTransactionManager();
+		tm.setDataSource(getDataSource());
+		return tm;
+	}
+
 	// Load property in message/validator.properties
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
@@ -80,5 +90,10 @@ public class ApplicationContextConfig {
 	@Bean
 	public CustomerDAO getCustomerDAO() {
 		return new CustomerDAOImpl(getDataSource());
+	}
+
+	@Bean
+	public LanguageDAO getLanguageDAO() {
+		return new LanguageDAOImpl(getDataSource());
 	}
 }

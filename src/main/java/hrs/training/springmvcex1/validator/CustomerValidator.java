@@ -46,7 +46,7 @@ public class CustomerValidator implements Validator {
 		}
 
 		String nameRegex = "[^ ]([\\u3000-\\u303F ]*|" + "[\\u3040-\\u309F ]*|" + "[\\u30A0-\\u30FF ]*|"
-				+ "[\\uFF00-\\uFFEF ]*|" + "[\\u4E00-\\u9FAF ]*|" + "[a-zA-Z ]*)";
+				+ "[\\uFF00-\\uFFEF ]*|" + "[\\u4E00-\\u9FAF ]*|" + "[\\u00C0-\\u1EF9 &a-zA-Z ]*|" + "[a-zA-Z ]*)";
 
 		if(!Pattern.matches(nameRegex, customer.getName())) {
 			errors.rejectValue("name", "NotMatch.customer.name");

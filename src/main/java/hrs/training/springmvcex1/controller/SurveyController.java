@@ -17,12 +17,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hrs.training.springmvcex1.model.Customer;
 import hrs.training.springmvcex1.service.CustomerService;
+import hrs.training.springmvcex1.service.LanguageService;
 import hrs.training.springmvcex1.validator.CustomerValidator;
 
 @Controller
 public class SurveyController {
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private LanguageService languageService;
 
 	@Autowired
 	private CustomerValidator customerValidator;
@@ -90,12 +94,6 @@ public class SurveyController {
 		schoolYearList.put(6, "六年生");
 		model.addObject("schoolYearList", schoolYearList);
 
-		Map<String, String> languageList = new LinkedHashMap<String, String>();
-		languageList.put("中国語", "中国語");
-		languageList.put("英語", "英語");
-		languageList.put("韓国語", "韓国語");
-		languageList.put("ベトナム語", "ベトナム語");
-		languageList.put("フランス語", "フランス語");
-		model.addObject("languageList", languageList);
+		model.addObject("languageList", languageService.listAll());
 	}
 }
