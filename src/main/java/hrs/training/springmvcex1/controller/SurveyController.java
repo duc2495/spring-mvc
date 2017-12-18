@@ -45,6 +45,7 @@ public class SurveyController {
 		if (target.getClass() == Customer.class) {
 			dataBinder.setValidator(customerValidator);
 		}
+		
 	}
 
 	@RequestMapping(value = "/newSurvey", method = RequestMethod.GET)

@@ -1,10 +1,14 @@
 package hrs.training.springmvcex1.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import hrs.training.springmvcex1.model.LanguageToString;
+import hrs.training.springmvcex1.model.StringToLanguage;
 
 @Configuration
 @EnableWebMvc
@@ -21,4 +25,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+	
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToLanguage());
+        registry.addConverter(new LanguageToString());
+    }
+
 }

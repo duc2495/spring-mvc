@@ -18,7 +18,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/", "/homepage" })
 	public ModelAndView listCustomer(ModelAndView model) throws IOException {
-		List<Customer> listCustomer = customerService.listAll();
+		List<Customer> listCustomer = customerService.findAll();
 		model.addObject("listCustomer", listCustomer);
 		model.setViewName("homePage");
 		return model;

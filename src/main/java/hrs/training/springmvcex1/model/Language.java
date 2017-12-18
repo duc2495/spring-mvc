@@ -10,8 +10,14 @@ public class Language {
 
 	}
 
-	public Language(String id) {
-		this.id = Integer.parseInt(id);
+
+	public Language(String name) {
+		this.name = name;
+	}
+	
+	public Language(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public int getId() {

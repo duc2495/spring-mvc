@@ -32,6 +32,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public List<Customer> listAll(){
 		return custDao.listAll();
 	}
+	
+	@Override
+	public List<Customer> findAll(){
+		return custDao.findAll();
+	}
+
 
 	@Override
 	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {

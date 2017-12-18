@@ -3,6 +3,8 @@ package hrs.training.springmvcex1.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 				Language language = customer.getLanguages().get(i);
 				ps.setInt(1, customer.getId());
 				ps.setInt(2, language.getId());
-				System.out.println(customer.getId() + "|"+language.getId());
 			}
 
 			@Override
@@ -130,6 +131,35 @@ public class CustomerDAOImpl implements CustomerDAO {
 			aCustomer.setSchoolYear(rs.getInt("school_year"));
 			return aCustomer;
 		}
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		String sql = "SELECT * FROM CUSTOMER C " + " INNER JOIN CUSTOMER_LANGUAGE CL ON C.customer_id = CL.customer_id"
+				+ " INNER JOIN LANGUAGE L ON CL.language_id = L.language_id";
+		List<Customer> customers = new ArrayList<Customer>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		for (Map row : rows) {
+			int currentId = 0;
+			List<Language> languages = new ArrayList<Language>();
+			if (currentId == (Integer) row.get("customer_id")) {
+				languages.add(new Language((Integer) (row.get("customer_id")), (String) row.get("name")));
+			} else {
+				currentId = (Integer) row.get("customer_id");
+				Customer customer = new Customer();
+				customer.setId((Integer) (row.get("customer_id")));
+				customer.setName((String) row.get("name"));
+				customer.setBirthday((Date) row.get("birthday"));
+				customer.setAddress((String) row.get("address"));
+				customer.setGender((String) row.get("gender"));
+				customer.setSchool((String) row.get("school"));
+				customer.setSchoolYear((Integer) row.get("school_year"));
+				customer.setLanguages(languages);
+				customers.add(customer);
+				languages = new ArrayList<Language>();
+			}
+		}
+		return customers;
 	}
 
 	@Override

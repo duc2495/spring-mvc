@@ -11,6 +11,7 @@ public interface CustomerDAO {
 	Customer findByCustomerId(int custId);
 
 	List<Customer> listAll();
+	List<Customer> findAll();
 
 	List<Customer> getCustomersByPage(Integer offset, Integer maxResult);
 
