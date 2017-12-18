@@ -1,5 +1,6 @@
 package hrs.training.springmvcex1.dao.impl;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,6 +19,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import hrs.training.springmvcex1.dao.CustomerDAO;
 import hrs.training.springmvcex1.model.Customer;
+import hrs.training.springmvcex1.model.Language;
 
 public class CustomerDAOImpl implements CustomerDAO {
 
@@ -31,15 +34,34 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public void insert(Customer customer) {
 		customer.setId(this.getNextId());
-		System.out.println(customer.getId());
 		String sql1 = "INSERT INTO Customer (customer_id, name, birthday, address, gender, school, school_year)"
 				+ "VALUES (:id, :name, :birthday, :address, :gender, :school, :schoolYear)";
 		namedParameterJdbcTemplate.update(sql1, getCustomerParameter(customer));
 		if (!customer.getLanguages().isEmpty()) {
-			String sql2 = "INSERT INTO Customer_Language (customer_id, language_id)"
-					+ "VALUES ( :customer_id, :language_id)";
-			namedParameterJdbcTemplate.update(sql2, getCustomerLanguageParameter(customer));
+			insertBatch(customer);
 		}
+	}
+
+	// insert batch
+	public void insertBatch(Customer customer) {
+
+		String sql = "INSERT INTO Customer_Language (customer_id, language_id)" + "VALUES (?, ?)";
+
+		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Language language = customer.getLanguages().get(i);
+				ps.setInt(1, customer.getId());
+				ps.setInt(2, language.getId());
+				System.out.println(customer.getId() + "|"+language.getId());
+			}
+
+			@Override
+			public int getBatchSize() {
+				return customer.getLanguages().size();
+			}
+		});
 	}
 
 	@Override
@@ -75,18 +97,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 		paramSource.addValue("gender", customer.getGender());
 		paramSource.addValue("school", customer.getSchool());
 		paramSource.addValue("schoolYear", customer.getSchoolYear());
-
-		return paramSource;
-	}
-
-	private SqlParameterSource getCustomerLanguageParameter(Customer customer) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("languages", customer.getLanguages());
-		for (int i = 0; i < customer.getLanguages().size(); i++) {
-			paramSource.addValue("customer_id", customer.getId());
-			paramSource.addValue("language_id", customer.getLanguages().get(i).getId());
-			System.out.println(customer.getLanguages().get(i).getId());
-		}
 
 		return paramSource;
 	}

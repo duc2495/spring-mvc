@@ -24,7 +24,7 @@ import hrs.training.springmvcex1.validator.CustomerValidator;
 public class SurveyController {
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private LanguageService languageService;
 
@@ -46,7 +46,7 @@ public class SurveyController {
 			dataBinder.setValidator(customerValidator);
 		}
 	}
-	
+
 	@RequestMapping(value = "/newSurvey", method = RequestMethod.GET)
 	public ModelAndView newSurvey(ModelAndView model) {
 		Customer newCustomer = new Customer();
@@ -94,6 +94,6 @@ public class SurveyController {
 		schoolYearList.put(6, "六年生");
 		model.addObject("schoolYearList", schoolYearList);
 
-		model.addObject("languageList", languageService.listAll());
+		model.addObject("languages", languageService.listAll());
 	}
 }

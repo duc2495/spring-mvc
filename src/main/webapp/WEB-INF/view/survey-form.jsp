@@ -46,12 +46,14 @@
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="red-label">*</label><label class="control-label">性別</label>
 						<div class="radio">
-							<label class=control-label><form:radiobutton path="gender"
-									value="男性" name="radio-gender" class="option-input radio" />男性</label>
+							<label class=control-label><form:radiobutton
+									path="gender" value="男性" name="radio-gender"
+									class="option-input radio" />男性</label>
 						</div>
 						<div class="radio">
-							<label class=control-label><form:radiobutton path="gender"
-									value="女性" name="radio-gender" class="option-input radio" />女性</label>
+							<label class=control-label><form:radiobutton
+									path="gender" value="女性" name="radio-gender"
+									class="option-input radio" />女性</label>
 						</div>
 						<form:errors path="gender" class="control-label" />
 					</div>
@@ -80,7 +82,7 @@
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">外国語スキル</label>
 						<form:checkboxes element="span class='checkbox'" path="languages"
-							items="${languageList}" />
+							items="${languages}" itemValue ="id" itemLabel = "name"/>
 						<form:errors path="languages" class="control-label" />
 					</div>
 				</spring:bind>

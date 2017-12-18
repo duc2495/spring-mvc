@@ -21,6 +21,10 @@ public class LanguageServiceImpl implements LanguageService{
 	public void insert(Language language) {
 		languageDAO.insert(language);
 	}
+	@Override
+	public Language getLanguageById(int id) {
+		return languageDAO.getLanguageById(id);
+	}
 
 	@Override
 	public List<Language> listAll() {
