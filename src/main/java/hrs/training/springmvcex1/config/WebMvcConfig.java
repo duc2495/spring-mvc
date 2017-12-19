@@ -7,9 +7,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import hrs.training.springmvcex1.model.LanguageToString;
-import hrs.training.springmvcex1.model.StringToLanguage;
-
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -28,8 +25,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new StringToLanguage());
-        registry.addConverter(new LanguageToString());
+        registry.addConverter(new JsonStringToLanguage());
+        registry.addConverter(new LanguageToJsonString());
     }
 
 }

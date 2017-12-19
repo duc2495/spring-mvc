@@ -6,6 +6,8 @@ import hrs.training.springmvcex1.model.Language;
 
 public interface LanguageDAO {
 	void insert(Language language);
+
 	Language getLanguageById(int id);
-	List<Language> listAll();
+
+	List<Language> findAll();
 }

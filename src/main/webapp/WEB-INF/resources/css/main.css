@@ -39,12 +39,12 @@ footer {
 	color: rgba(255, 255, 255, 1);
 }
 
-.checkbox input[type=checkbox], .radio input[type=radio] {
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox],
+	.radio input[type=radio] {
 	margin-left: 0px;
-}
-
-.checkbox, .radio {
 	margin-top: 0px;
+	height: 20px;
+	width: 20px;
 }
 
 .free-bg {
@@ -68,14 +68,10 @@ footer {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	height: 20px;
-	width: 20px;
 	transition: all 0.15s ease-out 0s;
 	background: #cbd1d8;
 	border: none;
-	color: #fff;
 	cursor: pointer;
-	display: inline-block;
 	margin-right: 0.5rem;
 	outline: none;
 	z-index: 1000;
@@ -94,7 +90,6 @@ footer {
 	width: 20px;
 	position: absolute;
 	content: '✔';
-	display: inline-block;
 	font-size: 16px;
 	text-align: center;
 	line-height: 20px;
@@ -115,6 +110,10 @@ footer {
 
 .option-input.radio::after {
 	border-radius: 50%;
+}
+
+.option-input.checkbox {
+	background: #fff
 }
 
 .button {

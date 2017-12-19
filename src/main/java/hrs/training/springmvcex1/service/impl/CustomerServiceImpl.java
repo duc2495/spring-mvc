@@ -27,12 +27,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer findByCustomerId(int custId){
 		return custDao.findByCustomerId(custId);
 	}
-	
-	@Override
-	public List<Customer> listAll(){
-		return custDao.listAll();
-	}
-	
+
 	@Override
 	public List<Customer> findAll(){
 		return custDao.findAll();
