@@ -11,7 +11,7 @@
 			<br>
 			<h4>大学生の情報について調査します。</h4>
 			<p class="red-label">* 項目を必須入力。</p>
-			<form:form action="saveSurvey" method="post"
+			<form:form action="savesurvey" method="post"
 				modelAttribute="customerForm">
 
 				<form:hidden path="id" />

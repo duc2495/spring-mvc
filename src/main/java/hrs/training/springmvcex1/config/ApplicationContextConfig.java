@@ -73,9 +73,7 @@ public class ApplicationContextConfig {
 
 	@Bean
 	public DataSourceTransactionManager transactionManager() {
-		DataSourceTransactionManager tm = new DataSourceTransactionManager();
-		tm.setDataSource(getDataSource());
-		return tm;
+		return new DataSourceTransactionManager(getDataSource());
 	}
 
 	// Load property in message/validator.properties

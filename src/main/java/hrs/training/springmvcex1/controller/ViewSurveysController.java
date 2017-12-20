@@ -12,7 +12,7 @@ import hrs.training.springmvcex1.model.Customer;
 import hrs.training.springmvcex1.service.CustomerService;
 
 @Controller
-public class ViewSurveys {
+public class ViewSurveysController {
 	@Autowired
 	private CustomerService customerService;
 	

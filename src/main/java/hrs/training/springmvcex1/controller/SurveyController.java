@@ -48,7 +48,7 @@ public class SurveyController {
 		
 	}
 
-	@RequestMapping(value = "/newSurvey", method = RequestMethod.GET)
+	@RequestMapping(value = "/newsurvey", method = RequestMethod.GET)
 	public ModelAndView newSurvey(ModelAndView model) {
 		Customer newCustomer = new Customer();
 		model.addObject("customerForm", newCustomer);
@@ -60,7 +60,7 @@ public class SurveyController {
 	// 1. @ModelAttribute bind form value
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
-	@RequestMapping(value = "/saveSurvey", method = RequestMethod.POST)
+	@RequestMapping(value = "/savesurvey", method = RequestMethod.POST)
 	public ModelAndView saveSurvey(ModelAndView model, @ModelAttribute("customerForm") @Validated Customer customer,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		// Nếu validate có lỗi.
@@ -72,12 +72,12 @@ public class SurveyController {
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Survey added successfully!");
 			customerService.insert(customer);
-			model.setViewName("redirect:/thankPage");
+			model.setViewName("redirect:/thankpage");
 			return model;
 		}
 	}
 
-	@RequestMapping(value = "/thankPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/thankpage", method = RequestMethod.GET)
 	public ModelAndView thankPage(ModelAndView model) {
 		model.setViewName("thankPage");
 		return model;

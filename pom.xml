@@ -11,6 +11,7 @@
 	<properties>
 		<servlet-api.version>4.0.0</servlet-api.version>
 		<spring.version>4.3.12.RELEASE</spring.version>
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 		<tiles.version>3.0.7</tiles.version>
 		<jstl.version>1.2.1</jstl.version>
 	</properties>
@@ -75,6 +76,20 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
 
 		<!-- http://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
