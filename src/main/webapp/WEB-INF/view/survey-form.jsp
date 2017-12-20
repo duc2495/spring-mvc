@@ -21,6 +21,7 @@
 						<label class="red-label">*</label> <label class=control-label>名前</label>
 						<form:input path="name" type="text" class="form-control" id="name"
 							placeholder="回答を入力" />
+						<span class="bar"></span>
 						<form:errors path="name" class="control-label" />
 					</div>
 				</spring:bind>
@@ -29,6 +30,7 @@
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="red-label">*</label><label class=control-label>生年月日</label>
 						<form:input path="birthday" type="date" class="form-control" />
+						<span class="bar"></span>
 						<form:errors path="birthday" class="control-label" />
 					</div>
 				</spring:bind>
@@ -38,6 +40,7 @@
 						<label class="red-label">*</label><label class=control-label>住所</label>
 						<form:textarea path="address" rows="3" class="form-control"
 							id="address" placeholder="回答を入力" />
+						<span class="bar"></span>
 						<form:errors path="address" class="control-label" />
 					</div>
 				</spring:bind>
@@ -64,6 +67,7 @@
 						<label class="red-label">*</label><label class="control-label">大学名</label>
 						<form:input path="school" type="text" class="form-control"
 							id="school" placeholder="回答を入力" />
+						<span class="bar"></span>
 						<form:errors path="school" class="control-label" />
 					</div>
 				</spring:bind>
@@ -74,18 +78,20 @@
 						<form:select path="schoolYear" class="form-control">
 							<form:options items="${schoolYearList}" />
 						</form:select>
+						<span class="bar"></span>
 						<form:errors path="schoolYear" class="control-label" />
 					</div>
 				</spring:bind>
 
-				<spring:bind path="languages">
-					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="control-label">外国語スキル</label>
-						<form:checkboxes element="span class='checkbox'" path="languages"
-							items="${languages}" itemLabel = "name"/>
-						<form:errors path="languages" class="control-label" />
+				<div class="form-group">
+					<label class="control-label">外国語スキル</label>
+					<div>
+						<form:checkboxes element="div class='checkbox'"
+							cssClass="option-input checkbox" path="languages"
+							items="${languages}" itemLabel="name" />
 					</div>
-				</spring:bind>
+				</div>
+
 
 				<button type="submit" class="btn btn-primary button">送信</button>
 			</form:form>

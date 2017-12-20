@@ -1,6 +1,9 @@
 /* Set default page style */
 body {
 	background-color: #ede7f6;
+	font-family: "Times New Roman", Times, 'MS Pゴシック', 'MS PGothic',
+		sans-serif;
+	font-size: 16px;
 }
 
 .navbar {
@@ -8,6 +11,7 @@ body {
 	margin-bottom: 0;
 	border-radius: 0;
 	min-height: 5%;
+	border: none;
 }
 
 .text-left {
@@ -21,11 +25,7 @@ footer {
 	min-height: 5%;
 }
 /* End of set default page style */
-.survey-content {
-	margin-top: -5%;
-	margin-bottom: 5%;
-	padding-bottom: 20px;
-}
+
 /* Set home page style */
 .home-content {
 	min-height: 90%;
@@ -37,6 +37,12 @@ footer {
 	background-color: rgb(103, 58, 183);
 	height: 25%;
 	color: rgba(255, 255, 255, 1);
+}
+
+.survey-content {
+	margin-top: -5%;
+	margin-bottom: 5%;
+	padding-bottom: 20px;
 }
 
 .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox],
@@ -112,10 +118,6 @@ footer {
 	border-radius: 50%;
 }
 
-.option-input.checkbox {
-	background: #fff
-}
-
 .button {
 	padding-left: 25px;
 	padding-right: 25px;
@@ -124,8 +126,68 @@ footer {
 }
 
 .form-group {
-	margin-bottom: 30px;
+	margin-bottom: 2px;
+	padding: 10px;
 }
+
+.form-control {
+	font-size: 16px;
+	width: 350px;
+	padding: 0px;
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+	border-bottom: 1px solid #673ab7;
+}
+
+.has-error {
+	background: #ffebee;
+}
+
+.has-error .form-control {
+	background: #ffebee;
+	box-shadow: none;
+}
+
+.has-error .control-label {
+	color: #db4437;
+}
+
+.bar {
+	position: relative;
+	display: block;
+	width: 350px;
+	margin-bottom: 10px;
+}
+
+.bar:before, .bar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #673ab7;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+
+.has-error .bar:before, .has-error .bar:after {
+	background: #cc0000;
+}
+
+.bar:before {
+	left: 50%;
+}
+
+.bar:after {
+	right: 50%;
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+	width: 50%;
+}
+
 /* End of set survey page style */
 
 /* Set error page style */
