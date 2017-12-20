@@ -33,7 +33,7 @@
 						<td>${customer.school}</td>
 						<td>${customer.schoolYear}</td>
 						<td><c:forEach var="languages" items="${customer.languages}"
-								varStatus="loop">${languages}
+								varStatus="loop">${languages.name}
     				        <c:if test="${not loop.last}">、</c:if>
 							</c:forEach></td>
 					</tr>

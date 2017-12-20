@@ -27,11 +27,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer findByCustomerId(int custId){
 		return custDao.findByCustomerId(custId);
 	}
-	
+
 	@Override
-	public List<Customer> listAll(){
-		return custDao.listAll();
+	public List<Customer> findAll(){
+		return custDao.findAll();
 	}
+
 
 	@Override
 	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {

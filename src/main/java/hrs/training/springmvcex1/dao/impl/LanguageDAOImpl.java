@@ -20,15 +20,15 @@ public class LanguageDAOImpl implements LanguageDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
 	public LanguageDAOImpl(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate (dataSource);
+		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	@Override
 	public void insert(Language language) {
-		String sql = "INSERT INTO Language (name)" + "VALUES (?)";
+		String sql = "INSERT INTO Language (language)" + "VALUES (?)";
 		jdbcTemplate.update(sql, language.getName());
 
 	}
@@ -48,20 +48,20 @@ public class LanguageDAOImpl implements LanguageDAO {
 		}
 		return result;
 	}
-	
+
 	@Override
-	public List<Language> listAll() {
+	public List<Language> findAll() {
 		String sql = "SELECT * FROM Language";
 		List<Language> listLanguage = jdbcTemplate.query(sql, new LanguageMapper());
 		return listLanguage;
 	}
-	
+
 	private static final class LanguageMapper implements RowMapper<Language> {
 
 		public Language mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Language language = new Language();
 			language.setId(rs.getInt("language_id"));
-			language.setName(rs.getString("name"));
+			language.setName(rs.getString("language"));
 			return language;
 		}
 	}

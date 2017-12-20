@@ -1,18 +1,16 @@
 package hrs.training.springmvcex1.dao.impl;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -42,7 +40,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		}
 	}
 
-	// insert batch
+	// insert language of customer
 	public void insertBatch(Customer customer) {
 
 		String sql = "INSERT INTO Customer_Language (customer_id, language_id)" + "VALUES (?, ?)";
@@ -54,7 +52,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 				Language language = customer.getLanguages().get(i);
 				ps.setInt(1, customer.getId());
 				ps.setInt(2, language.getId());
-				System.out.println(customer.getId() + "|"+language.getId());
 			}
 
 			@Override
@@ -66,25 +63,85 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public Customer findByCustomerId(int id) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-
-		String sql = "SELECT * FROM Customer WHERE customer_id=:id";
-
-		Customer result = null;
-		try {
-			result = namedParameterJdbcTemplate.queryForObject(sql, params, new CustomerMapper());
-		} catch (EmptyResultDataAccessException e) {
-			//
-		}
-		return result;
+		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
+				+ "FROM (SELECT * FROM CUSTOMER WHERE C.customer_id = " + id + ") C "
+				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
+				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
+				+ "ORDER BY C.customer_id";
+		List<Customer> customers = getCustomersBySql(sql);
+		return customers.get(0);
 	}
 
 	@Override
-	public List<Customer> listAll() {
-		String sql = "SELECT * FROM Customer";
-		List<Customer> listCustomer = namedParameterJdbcTemplate.query(sql, new CustomerMapper());
-		return listCustomer;
+	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {
+		if (offset == null) {
+			offset = 0;
+		}
+		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
+				+ "FROM (SELECT * FROM CUSTOMER LIMIT " + maxResult + " OFFSET " + offset + ") C "
+				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
+				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
+				+ "ORDER BY C.customer_id";
+		return getCustomersBySql(sql);
+	}
+
+	@Override
+	public Long count() {
+		String sql = "SELECT count(*) FROM CUSTOMER";
+		return jdbcTemplate.queryForObject(sql, new Object[] {}, Long.class);
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
+				+ "FROM CUSTOMER C "
+				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
+				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
+				+ "ORDER BY C.customer_id";
+		return getCustomersBySql(sql);
+	}
+
+	public List<Customer> getCustomersBySql(String sql) {
+		List<Customer> customers = new ArrayList<Customer>();
+		List<Language> languages = new ArrayList<Language>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		Customer customer = new Customer();
+		int currentId = 0;
+
+		for (Map<String, Object> row : rows) {
+			if (currentId == (Integer) row.get("customer_id")) {
+				if (row.get("language_id") != null) {
+					languages.add(new Language((Integer) (row.get("language_id")), (String) row.get("language")));
+				}
+			} else {
+				if (currentId != 0) {
+					customer.setLanguages(languages);
+					customers.add(customer);
+				}
+				currentId = (Integer) row.get("customer_id");
+				customer = new Customer();
+				languages = new ArrayList<Language>();
+				customer.setId((Integer) (row.get("customer_id")));
+				customer.setName((String) row.get("name"));
+				customer.setBirthday((Date) row.get("birthday"));
+				customer.setAddress((String) row.get("address"));
+				customer.setGender((String) row.get("gender"));
+				customer.setSchool((String) row.get("school"));
+				customer.setSchoolYear((Integer) row.get("school_year"));
+				if (row.get("language_id") != null) {
+					languages.add(new Language((Integer) (row.get("language_id")), (String) row.get("language")));
+				}
+			}
+		}
+		customer.setLanguages(languages);
+		customers.add(customer);
+		return customers;
+	}
+
+	@Override
+	public Integer getNextId() {
+		String sql = "Select nextval(pg_get_serial_sequence('customer', 'customer_id'))";
+		return jdbcTemplate.queryForObject(sql, new Object[] {}, Integer.class);
 	}
 
 	private SqlParameterSource getCustomerParameter(Customer customer) {
@@ -100,42 +157,4 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		return paramSource;
 	}
-
-	@Override
-	public List<Customer> getCustomersByPage(Integer offset, Integer maxResult) {
-		if (offset == null) {
-			offset = 0;
-		}
-		String sql = "SELECT * FROM Customer LIMIT " + maxResult + " OFFSET " + offset;
-		List<Customer> listCustomer = namedParameterJdbcTemplate.query(sql, new CustomerMapper());
-		return listCustomer;
-	}
-
-	@Override
-	public Long count() {
-		String sql = "SELECT count(*) FROM Customer";
-		return jdbcTemplate.queryForObject(sql, new Object[] {}, Long.class);
-	}
-
-	private static final class CustomerMapper implements RowMapper<Customer> {
-
-		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Customer aCustomer = new Customer();
-			aCustomer.setId(rs.getInt("customer_id"));
-			aCustomer.setName(rs.getString("name"));
-			aCustomer.setBirthday(rs.getDate("birthday"));
-			aCustomer.setAddress(rs.getString("address"));
-			aCustomer.setGender(rs.getString("gender"));
-			aCustomer.setSchool(rs.getString("school"));
-			aCustomer.setSchoolYear(rs.getInt("school_year"));
-			return aCustomer;
-		}
-	}
-
-	@Override
-	public Integer getNextId() {
-		String sql = "Select nextval(pg_get_serial_sequence('customer', 'customer_id'))";
-		return jdbcTemplate.queryForObject(sql, new Object[] {}, Integer.class);
-	}
-
 }

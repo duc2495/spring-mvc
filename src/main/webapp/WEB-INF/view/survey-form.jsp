@@ -82,7 +82,7 @@
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="control-label">外国語スキル</label>
 						<form:checkboxes element="span class='checkbox'" path="languages"
-							items="${languages}" itemValue ="id" itemLabel = "name"/>
+							items="${languages}" itemLabel = "name"/>
 						<form:errors path="languages" class="control-label" />
 					</div>
 				</spring:bind>

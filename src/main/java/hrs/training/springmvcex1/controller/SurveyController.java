@@ -45,6 +45,7 @@ public class SurveyController {
 		if (target.getClass() == Customer.class) {
 			dataBinder.setValidator(customerValidator);
 		}
+		
 	}
 
 	@RequestMapping(value = "/newSurvey", method = RequestMethod.GET)
@@ -94,6 +95,6 @@ public class SurveyController {
 		schoolYearList.put(6, "六年生");
 		model.addObject("schoolYearList", schoolYearList);
 
-		model.addObject("languages", languageService.listAll());
+		model.addObject("languages", languageService.findAll());
 	}
 }

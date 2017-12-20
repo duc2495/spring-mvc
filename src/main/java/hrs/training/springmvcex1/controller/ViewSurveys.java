@@ -10,16 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hrs.training.springmvcex1.model.Customer;
 import hrs.training.springmvcex1.service.CustomerService;
-import hrs.training.springmvcex1.service.LanguageService;
 
 @Controller
 public class ViewSurveys {
 	@Autowired
 	private CustomerService customerService;
 	
-	@Autowired
-	private LanguageService languageService;
-
 	@RequestMapping(value = { "/viewsurveys" })
 	public ModelAndView listCustomer(ModelAndView model, Integer offset) throws IOException {
 
