@@ -12,6 +12,9 @@ public interface CustomerService {
 
 	@Transactional
 	void insert(Customer customer);
+	
+	@Transactional
+	void delete(int id);
 
 	Customer findByCustomerId(int custId);
 

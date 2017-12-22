@@ -7,7 +7,7 @@
 	<div class="row content">
 		<div class="col-sm-2 sidenav"></div>
 		<div class="col-sm-8 text-left home-content">
-			<h2 class="text-center">${pageContext.request.userPrincipal.name} こんにちは！</h2>
+			<h2 class="text-center" style="color: red;">${message}</h2>
 		</div>
 		<div class="col-sm-2 sidenav"></div>
 	</div>

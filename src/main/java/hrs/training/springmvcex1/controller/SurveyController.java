@@ -1,6 +1,8 @@
 package hrs.training.springmvcex1.controller;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,7 +54,7 @@ public class SurveyController {
 	@RequestMapping(value = "/newsurvey", method = RequestMethod.GET)
 	public ModelAndView newSurvey(ModelAndView model) {
 		Customer newCustomer = new Customer();
-		model.addObject("customerForm", newCustomer);
+		model.addObject("customer", newCustomer);
 		surveyDefaultModel(model);
 		model.setViewName("surveyForm");
 		return model;
@@ -83,6 +86,31 @@ public class SurveyController {
 		return model;
 	}
 
+    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)  
+    public ModelAndView delete(ModelAndView model, @PathVariable int id,  final RedirectAttributes redirectAttributes){  
+		redirectAttributes.addFlashAttribute("css", "success");
+		redirectAttributes.addFlashAttribute("msg", "Survey added successfully!");
+    	customerService.delete(id);  
+        return new ModelAndView("redirect:/viewsurveys");  
+    }  
+    
+	@RequestMapping(value = "/viewsurveys", method = RequestMethod.GET)
+	public ModelAndView listCustomer(ModelAndView model, Integer offset) throws IOException {
+
+		Integer maxResult = 15;
+		List<Customer> listCustomer = customerService.getCustomersByPage(offset, maxResult);
+		if (listCustomer.get(0).getId() == 0) {
+			model.addObject("listCustomer", null);
+			model.setViewName("viewSurveys");
+			return model;
+		}
+		model.addObject("listCustomer", listCustomer);
+		model.addObject("count", customerService.count());
+		model.addObject("offset", offset);
+		model.setViewName("viewSurveys");
+		return model;
+	}
+    
 	public void surveyDefaultModel(ModelAndView model) {
 
 		Map<Integer, String> schoolYearList = new LinkedHashMap<Integer, String>();

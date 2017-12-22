@@ -40,13 +40,48 @@
 		<put-attribute name="footer" value="" />
 	</definition>
 
-	<!-- Error Page -->
-	<definition name="errorPage" extends="base.definition">
-		<put-attribute name="title" value="エラーページ" />
+	<!-- Error 404 Page -->
+	<definition name="404Page" extends="base.definition">
+		<put-attribute name="title" value="404エラー" />
 		<put-attribute name="header" value="" />
-		<put-attribute name="body" value="/WEB-INF/view/error-body.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/404.jsp" />
 		<put-attribute name="footer" value="" />
 	</definition>
 
+	<!-- Error 403 Page -->
+	<definition name="403Page" extends="base.definition">
+		<put-attribute name="title" value="403エラー" />
+		<put-attribute name="body" value="/WEB-INF/view/403.jsp" />
+	</definition>
+
+	<!-- Login Page -->
+	<definition name="loginPage" extends="base.definition">
+		<put-attribute name="title" value="login" />
+		<put-attribute name="body" value="/WEB-INF/view/login.jsp" />
+	</definition>
+
+	<!-- Logout Page -->
+	<definition name="logoutPage" extends="base.definition">
+		<put-attribute name="title" value="logout" />
+		<put-attribute name="body" value="/WEB-INF/view/logout.jsp" />
+	</definition>
+
+	<!-- Admin Page -->
+	<definition name="adminPage" extends="base.definition">
+		<put-attribute name="title" value="admin" />
+		<put-attribute name="body" value="/WEB-INF/view/admin.jsp" />
+	</definition>
+
+	<!-- User Page -->
+	<definition name="userPage" extends="base.definition">
+		<put-attribute name="title" value="user" />
+		<put-attribute name="body" value="/WEB-INF/view/user.jsp" />
+	</definition>
+
+	<!-- Language Page -->
+	<definition name="languageForm" extends="base.definition">
+		<put-attribute name="title" value="Language" />
+		<put-attribute name="body" value="/WEB-INF/view/language-form.jsp" />
+	</definition>
 
 </tiles-definitions>

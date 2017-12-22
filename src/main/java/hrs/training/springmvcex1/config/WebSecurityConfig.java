@@ -14,7 +14,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.inMemoryAuthentication().withUser("user123").password("user123").roles("USER");
-		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER, ADMIN");
+		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 	}
 
 	@Override
@@ -24,13 +24,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Các trang không yêu cầu login
 		http.authorizeRequests().antMatchers("/", "/homepage", "/login", "/logout", "/newsurveys").permitAll();
 
-		// Trang /viewsurveys yêu cầu phải login với vai trò USER hoặc ADMIN.
+		// Trang yêu cầu phải login với vai trò USER hoặc ADMIN.
 		// Nếu chưa login, sẽ redirect tới trang /login.
-		http.authorizeRequests().antMatchers("/viewsurveys").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/viewsurveys", "/user").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
 		// For ADMIN only.
 		// Trang chỉ dành cho ADMIN
-		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/admin", "/delete/*", "/newlanguage").access("hasRole('ROLE_ADMIN')");
 		
 		// Permission denied
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Submit URL của trang login
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
 				.loginPage("/login")//
-				.defaultSuccessUrl("/userInfo")//
+				.defaultSuccessUrl("/homepage")//
 				.failureUrl("/login?error=true")//
 				.usernameParameter("username")//
 				.passwordParameter("password")
