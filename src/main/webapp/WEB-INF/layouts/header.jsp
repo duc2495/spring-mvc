@@ -17,19 +17,19 @@
 				<li><a href="${pageContext.request.contextPath}/homepage">ホーム</a></li>
 				<li><a href="${pageContext.request.contextPath}/viewsurveys">アンケートリスト</a></li>
 				<li><a href="${pageContext.request.contextPath}/newsurvey">新しいアンケート</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
+				<li><a href="${pageContext.request.contextPath}/languages">管理者</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
 					<c:when test="${pageContext.request.userPrincipal.name == null}">
 						<li><a href="${pageContext.request.contextPath}/login"><span
-								class="glyphicon glyphicon-log-in"></span> Login</a></li>
+								class="glyphicon glyphicon-log-in"></span> ログイン</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/user"><span
-								class="glyphicon"></span> Profile</a></li>
+								class="glyphicon"></span> プロフィール</a></li>
 						<li><a href="${pageContext.request.contextPath}/logout"><span
-								class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+								class="glyphicon glyphicon-log-in"></span> ログアウト</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// For ADMIN only.
 		// Trang chỉ dành cho ADMIN
-		http.authorizeRequests().antMatchers("/admin", "/delete/*", "/newlanguage").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/languages", "/delete/*", "/newlanguage").access("hasRole('ROLE_ADMIN')");
 		
 		// Permission denied
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");

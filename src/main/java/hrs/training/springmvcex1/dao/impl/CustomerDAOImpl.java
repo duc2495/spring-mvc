@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -113,7 +114,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public List<Customer> getCustomersBySql(String sql) {
 		List<Customer> customers = new ArrayList<Customer>();
 		List<Language> languages = new ArrayList<Language>();
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		List<Map<String, Object>> rows;
+		try {
+		rows = jdbcTemplate.queryForList(sql);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
 		Customer customer = new Customer();
 		int currentId = 0;
 

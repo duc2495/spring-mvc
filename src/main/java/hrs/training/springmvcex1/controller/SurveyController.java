@@ -64,7 +64,7 @@ public class SurveyController {
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
 	@RequestMapping(value = "/savesurvey", method = RequestMethod.POST)
-	public ModelAndView saveSurvey(ModelAndView model, @ModelAttribute("customerForm") @Validated Customer customer,
+	public ModelAndView saveSurvey(ModelAndView model, @ModelAttribute("customer") @Validated Customer customer,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		// Nếu validate có lỗi.
 		if (result.hasErrors()) {

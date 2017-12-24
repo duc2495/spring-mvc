@@ -10,11 +10,10 @@ public class Language {
 
 	}
 
-
 	public Language(String name) {
 		this.name = name;
 	}
-	
+
 	public Language(int id, String name) {
 		this.id = id;
 		this.name = name;
@@ -34,6 +33,10 @@ public class Language {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isNew() {
+		return (this.id == 0);
 	}
 
 	public boolean equals(Object obj) {

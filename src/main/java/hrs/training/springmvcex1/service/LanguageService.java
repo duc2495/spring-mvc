@@ -8,7 +8,7 @@ import hrs.training.springmvcex1.model.Language;
 
 @Service("languageService")
 public interface LanguageService {
-	void insert(Language language);
+	void saveOrUpdate(Language language);
 
 	Language getLanguageById(int id);
 

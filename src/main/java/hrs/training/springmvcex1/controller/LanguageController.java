@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,10 +31,33 @@ public class LanguageController {
 	@RequestMapping(value = "/savelanguage", method = RequestMethod.POST)
 	public ModelAndView saveLanguage(ModelAndView model, @ModelAttribute("language") @Validated Language language,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
+		// Add message to flash scope
 		redirectAttributes.addFlashAttribute("css", "success");
-		redirectAttributes.addFlashAttribute("msg", "Language added successfully!");
-		languageService.insert(language);
-		model.setViewName("redirect:/admin");
+		if(language.isNew()){
+		  redirectAttributes.addFlashAttribute("msg", "言語を追加しました！");
+		}else{
+		  redirectAttributes.addFlashAttribute("msg", "言語を編集しました！");
+		}
+
+		languageService.saveOrUpdate(language);
+		model.setViewName("redirect:/languages");
+		return model;
+	}
+	
+	@RequestMapping(value = "/languages/{id}/update", method = RequestMethod.GET)
+	public ModelAndView showUpdateLanguageForm(@PathVariable("id") int id, ModelAndView model) {
+
+		Language language = languageService.getLanguageById(id);
+		model.addObject("language", language);
+		model.setViewName("languageForm");
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/languages", method = RequestMethod.GET)
+	public ModelAndView showAllLanguages(ModelAndView model) {
+		model.setViewName("languagePage");
+		model.addObject("listLanguage", languageService.findAll());
 		return model;
 	}
 }

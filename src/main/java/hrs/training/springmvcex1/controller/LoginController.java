@@ -19,11 +19,6 @@ public class LoginController {
 		return "logoutPage";
 	}
 
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage(Model model) {
-		return "adminPage";
-	}
-
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userInfo(Model model, Principal principal) {
 

@@ -84,7 +84,7 @@
 				</spring:bind>
 
 				<div class="form-group">
-					<label class="control-label">外国語スキル</label>
+					<label class="control-label">言語スキル</label>
 					<div>
 						<form:checkboxes element="div class='checkbox'"
 							cssClass="option-input checkbox" path="languages"

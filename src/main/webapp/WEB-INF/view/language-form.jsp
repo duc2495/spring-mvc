@@ -8,17 +8,23 @@
 	<div class="row content">
 		<div class="col-sm-4 sidenav"></div>
 		<div class="col-sm-4 text-left home-content ">
-			<h1 class=>Add language</h1>
+			<c:when test="${language == null}">
+				<h3 class=>新しい言語を追加します。</h3>
+			</c:when>
+			<c:otherwise>
+				<h3 class=>言語を編集します。</h3>
+			</c:otherwise>
+			<h3 class=>新しい言語を追加</h3>
 			<form:form action="${pageContext.request.contextPath}/savelanguage"
 				method='POST' modelAttribute="language">
 				<div class="form-group center-block">
 					<form:hidden path="id" />
-					<label class=control-label>Language</label>
+					<label class=control-label>言語</label>
 					<form:input path="name" type="text" class="form-control"
 						placeholder="回答を入力" />
 					<span class="bar"></span>
 				</div>
-				<button type="submit" class="btn btn-primary button">Submit</button>
+				<button type="submit" class="btn btn-primary button">追加</button>
 			</form:form>
 		</div>
 		<div class="col-sm-4 sidenav"></div>

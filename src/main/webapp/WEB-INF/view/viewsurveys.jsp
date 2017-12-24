@@ -12,7 +12,7 @@
 			<h3>応答の一覧</h3>
 			<c:choose>
 				<c:when test="${listCustomer == null}">
-					No data
+					データがありません。
 				</c:when>
 				<c:otherwise>
 					<table class="table table-striped">
@@ -25,8 +25,8 @@
 								<th>性別</th>
 								<th>学校</th>
 								<th>年生</th>
-								<th>外国語スキル</th>
-								<th>Action</th>
+								<th>言語スキル</th>
+								<th>アクション</th>
 							</tr>
 						</thead>
 
@@ -46,7 +46,7 @@
 								<td><form:form
 										action="${pageContext.request.contextPath}/delete/${customer.id}"
 										method="get">
-										<button type="submit" class="btn btn-danger">Delete</button>
+										<button type="submit" class="btn btn-danger">削除</button>
 									</form:form></td>
 
 							</tr>
