@@ -14,7 +14,7 @@ public class Customer {
 	private String name;
 	
 	// form:input - textbox
-	@DateTimeFormat(pattern="yyyy-mm-dd") 
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date birthday;
 
 	// form:textarea - textarea

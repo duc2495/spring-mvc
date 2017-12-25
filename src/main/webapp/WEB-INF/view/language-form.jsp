@@ -8,12 +8,14 @@
 	<div class="row content">
 		<div class="col-sm-4 sidenav"></div>
 		<div class="col-sm-4 text-left home-content ">
-			<c:when test="${language == null}">
-				<h3 class=>新しい言語を追加します。</h3>
-			</c:when>
-			<c:otherwise>
-				<h3 class=>言語を編集します。</h3>
-			</c:otherwise>
+			<c:choose>
+				<c:when test="${language == null}">
+					<h3 class=>新しい言語を追加します。</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class=>言語を編集します。</h3>
+				</c:otherwise>
+			</c:choose>
 			<h3 class=>新しい言語を追加</h3>
 			<form:form action="${pageContext.request.contextPath}/savelanguage"
 				method='POST' modelAttribute="language">
