@@ -1,28 +1,29 @@
 package hrs.training.springmvcex1.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ErrorController {
 
-	@RequestMapping(value = "errors", method = RequestMethod.GET)
-	public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
-		String errorMsg="Http Error!";
-		ModelAndView errorPage = new ModelAndView("errorPage");
-		int httpErrorCode = getErrorCode(httpRequest);
-		if (httpErrorCode == 404) {
-			errorMsg = "Http Error Code: 404. Resource not found";
-		}
-		errorPage.addObject("errorMsg", errorMsg);
-		return errorPage;
+	@RequestMapping(value = "/404", method = RequestMethod.GET)
+	public String badRequest(Model model) {
+		return "404Page";
 	}
 
-	private int getErrorCode(HttpServletRequest httpRequest) {
-		return (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public String accessDenied(Model model, Principal principal) {
+
+		if (principal != null) {
+			model.addAttribute("message",
+					"Hi " + principal.getName() + "<br> You do not have permission!");
+		} else {
+			model.addAttribute("msg", "You do not have permission!");
+		}
+		return "403Page";
 	}
 }

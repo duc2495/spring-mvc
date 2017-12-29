@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -32,7 +33,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public void insert(Customer customer) {
 		customer.setId(this.getNextId());
-		String sql1 = "INSERT INTO Customer (customer_id, name, birthday, address, gender, school, school_year)"
+		String sql1 = "INSERT INTO CUSTOMER (customer_id, name, birthday, address, gender, school, school_year)"
 				+ "VALUES (:id, :name, :birthday, :address, :gender, :school, :schoolYear)";
 		namedParameterJdbcTemplate.update(sql1, getCustomerParameter(customer));
 		if (!customer.getLanguages().isEmpty()) {
@@ -43,7 +44,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	// insert language of customer
 	public void insertBatch(Customer customer) {
 
-		String sql = "INSERT INTO Customer_Language (customer_id, language_id)" + "VALUES (?, ?)";
+		String sql = "INSERT INTO CUSTOMER_LANGUAGE (customer_id, language_id)" + "VALUES (?, ?)";
 
 		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
@@ -59,6 +60,15 @@ public class CustomerDAOImpl implements CustomerDAO {
 				return customer.getLanguages().size();
 			}
 		});
+	}
+
+	@Override
+	public void delete(int id) {
+		String sql1 = "DELETE FROM CUSTOMER_LANGUAGE WHERE customer_id = " + id + "";
+		jdbcTemplate.update(sql1);
+		String sql2 = "DELETE FROM CUSTOMER WHERE customer_id = " + id + "";
+		jdbcTemplate.update(sql2);
+
 	}
 
 	@Override
@@ -104,7 +114,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public List<Customer> getCustomersBySql(String sql) {
 		List<Customer> customers = new ArrayList<Customer>();
 		List<Language> languages = new ArrayList<Language>();
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		List<Map<String, Object>> rows;
+		try {
+		rows = jdbcTemplate.queryForList(sql);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
 		Customer customer = new Customer();
 		int currentId = 0;
 

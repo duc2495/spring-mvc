@@ -34,17 +34,23 @@ public class LanguageDAOImpl implements LanguageDAO {
 	}
 
 	@Override
+	public void update(Language language) {
+		String sql = "UPDATE Language SET language = ? WHERE language_id = " + language.getId() + "";
+		jdbcTemplate.update(sql, language.getName());
+	}
+
+	@Override
 	public Language getLanguageById(int id) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 
-		String sql = "SELECT * FROM Language WHERE languge_id=:id";
+		String sql = "SELECT * FROM Language WHERE language_id=:id";
 
 		Language result = null;
 		try {
 			result = namedParameterJdbcTemplate.queryForObject(sql, params, new LanguageMapper());
 		} catch (EmptyResultDataAccessException e) {
-			//
+			return null;
 		}
 		return result;
 	}
@@ -65,5 +71,4 @@ public class LanguageDAOImpl implements LanguageDAO {
 			return language;
 		}
 	}
-
 }

@@ -20,8 +20,12 @@ public class LanguageServiceImpl implements LanguageService {
 	}
 
 	@Override
-	public void insert(Language language) {
-		languageDAO.insert(language);
+	public void saveOrUpdate(Language language) {
+		if (getLanguageById(language.getId()) == null) {
+			languageDAO.insert(language);
+		} else {
+			languageDAO.update(language);
+		}
 	}
 
 	@Override

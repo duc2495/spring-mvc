@@ -8,7 +8,7 @@
         <h2>Error ! <span>Page Not Found</span></h2>
       </div>
       <p>For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
-      <p><a href="homepage">Go Home &raquo;</a></p>
+      <p><a href="${pageContext.request.contextPath}/homepage">Go Home &raquo;</a></p>
     </section>
 
   </div>

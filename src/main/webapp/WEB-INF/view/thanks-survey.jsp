@@ -12,7 +12,7 @@
 			<h2 class="text-center">大学生の情報について調査します。</h2>
 			<br><br>
 			<p>回答を記録しました。</p>
-			<a href="newSurvey">別の回答を送信</a>
+			<a href="newsurvey">別の回答を送信</a>
 		</div>
 		<div class="col-sm-4 sidenav"></div>
 	</div>

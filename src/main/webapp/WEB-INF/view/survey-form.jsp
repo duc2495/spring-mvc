@@ -11,8 +11,8 @@
 			<br>
 			<h4>大学生の情報について調査します。</h4>
 			<p class="red-label">* 項目を必須入力。</p>
-			<form:form action="saveSurvey" method="post"
-				modelAttribute="customerForm">
+			<form:form action="savesurvey" method="post"
+				modelAttribute="customer">
 
 				<form:hidden path="id" />
 
@@ -84,7 +84,7 @@
 				</spring:bind>
 
 				<div class="form-group">
-					<label class="control-label">外国語スキル</label>
+					<label class="control-label">言語スキル</label>
 					<div>
 						<form:checkboxes element="div class='checkbox'"
 							cssClass="option-input checkbox" path="languages"

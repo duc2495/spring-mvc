@@ -8,7 +8,9 @@ public interface CustomerDAO {
 
 	void insert(Customer customer);
 
-	Customer findByCustomerId(int custId);
+	void delete(int id);
+	
+	Customer findByCustomerId(int custId);	
 
 	List<Customer> findAll();
 

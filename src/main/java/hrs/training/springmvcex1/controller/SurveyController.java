@@ -1,6 +1,8 @@
 package hrs.training.springmvcex1.controller;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,10 +51,10 @@ public class SurveyController {
 		
 	}
 
-	@RequestMapping(value = "/newSurvey", method = RequestMethod.GET)
+	@RequestMapping(value = "/newsurvey", method = RequestMethod.GET)
 	public ModelAndView newSurvey(ModelAndView model) {
 		Customer newCustomer = new Customer();
-		model.addObject("customerForm", newCustomer);
+		model.addObject("customer", newCustomer);
 		surveyDefaultModel(model);
 		model.setViewName("surveyForm");
 		return model;
@@ -60,8 +63,8 @@ public class SurveyController {
 	// 1. @ModelAttribute bind form value
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
-	@RequestMapping(value = "/saveSurvey", method = RequestMethod.POST)
-	public ModelAndView saveSurvey(ModelAndView model, @ModelAttribute("customerForm") @Validated Customer customer,
+	@RequestMapping(value = "/savesurvey", method = RequestMethod.POST)
+	public ModelAndView saveSurvey(ModelAndView model, @ModelAttribute("customer") @Validated Customer customer,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		// Nếu validate có lỗi.
 		if (result.hasErrors()) {
@@ -72,17 +75,42 @@ public class SurveyController {
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Survey added successfully!");
 			customerService.insert(customer);
-			model.setViewName("redirect:/thankPage");
+			model.setViewName("redirect:/thankpage");
 			return model;
 		}
 	}
 
-	@RequestMapping(value = "/thankPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/thankpage", method = RequestMethod.GET)
 	public ModelAndView thankPage(ModelAndView model) {
 		model.setViewName("thankPage");
 		return model;
 	}
 
+    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)  
+    public ModelAndView delete(ModelAndView model, @PathVariable int id,  final RedirectAttributes redirectAttributes){  
+		redirectAttributes.addFlashAttribute("css", "success");
+		redirectAttributes.addFlashAttribute("msg", "Survey added successfully!");
+    	customerService.delete(id);  
+        return new ModelAndView("redirect:/viewsurveys");  
+    }  
+    
+	@RequestMapping(value = "/viewsurveys", method = RequestMethod.GET)
+	public ModelAndView listCustomer(ModelAndView model, Integer offset) throws IOException {
+
+		Integer maxResult = 15;
+		List<Customer> listCustomer = customerService.getCustomersByPage(offset, maxResult);
+		if (listCustomer.get(0).getId() == 0) {
+			model.addObject("listCustomer", null);
+			model.setViewName("viewSurveys");
+			return model;
+		}
+		model.addObject("listCustomer", listCustomer);
+		model.addObject("count", customerService.count());
+		model.addObject("offset", offset);
+		model.setViewName("viewSurveys");
+		return model;
+	}
+    
 	public void surveyDefaultModel(ModelAndView model) {
 
 		Map<Integer, String> schoolYearList = new LinkedHashMap<Integer, String>();

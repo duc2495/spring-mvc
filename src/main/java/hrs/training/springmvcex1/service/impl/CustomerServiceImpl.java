@@ -24,6 +24,11 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
+	public void delete(int id) {
+		custDao.delete(id);
+	}
+	
+	@Override
 	public Customer findByCustomerId(int custId){
 		return custDao.findByCustomerId(custId);
 	}
