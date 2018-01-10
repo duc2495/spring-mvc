@@ -16,7 +16,6 @@
 					<h3 class=>言語を編集します。</h3>
 				</c:otherwise>
 			</c:choose>
-			<h3 class=>新しい言語を追加</h3>
 			<form:form action="${pageContext.request.contextPath}/savelanguage"
 				method='POST' modelAttribute="language">
 				<div class="form-group center-block">
