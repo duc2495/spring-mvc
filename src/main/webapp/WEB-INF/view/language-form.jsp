@@ -9,7 +9,7 @@
 		<div class="col-sm-4 sidenav"></div>
 		<div class="col-sm-4 text-left home-content ">
 			<c:choose>
-				<c:when test="${language == null}">
+				<c:when test="${language.name == null}">
 					<h3 class=>新しい言語を追加します。</h3>
 				</c:when>
 				<c:otherwise>
