@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import hrs.training.springmvcex1.model.Customer;
 import hrs.training.springmvcex1.model.Language;
 import hrs.training.springmvcex1.service.LanguageService;
 import hrs.training.springmvcex1.validator.LanguageValidator;
@@ -35,12 +34,10 @@ public class LanguageController {
 		if (target == null) {
 			return;
 		}
-		System.out.println("Target=" + target);
 
-		if (target.getClass() == Customer.class) {
+		if (target.getClass() == Language.class) {
 			dataBinder.setValidator(languageValidator);
 		}
-
 	}
 
 	@RequestMapping(value = "/newlanguage", method = RequestMethod.GET)

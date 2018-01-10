@@ -21,10 +21,15 @@
 				method='POST' modelAttribute="language">
 				<div class="form-group center-block">
 					<form:hidden path="id" />
-					<label class=control-label>言語</label>
-					<form:input path="name" type="text" class="form-control"
-						placeholder="回答を入力" />
-					<span class="bar"></span>
+					<spring:bind path="name">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<label class="red-label">*</label> <label class=control-label>言語</label>
+							<form:input path="name" type="text" class="form-control"
+								id="name" placeholder="回答を入力" />
+							<span class="bar"></span>
+							<form:errors path="name" class="control-label" />
+						</div>
+					</spring:bind>
 				</div>
 				<button type="submit" class="btn btn-primary button">追加</button>
 			</form:form>

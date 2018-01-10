@@ -43,12 +43,10 @@ public class SurveyController {
 		if (target == null) {
 			return;
 		}
-		System.out.println("Target=" + target);
 
 		if (target.getClass() == Customer.class) {
 			dataBinder.setValidator(customerValidator);
 		}
-		
 	}
 
 	@RequestMapping(value = "/newsurvey", method = RequestMethod.GET)
