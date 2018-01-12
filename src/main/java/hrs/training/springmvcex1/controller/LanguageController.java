@@ -59,7 +59,7 @@ public class LanguageController {
 			// Add message to flash scope
 			redirectAttributes.addFlashAttribute("css", "success");
 			if (language.isNew()) {
-				redirectAttributes.addFlashAttribute("msg", "言語を追加しました！");
+				redirectAttributes.addFlashAttribute("msg", "新しい言語を追加しました！");
 			} else {
 				redirectAttributes.addFlashAttribute("msg", "言語を編集しました！");
 			}

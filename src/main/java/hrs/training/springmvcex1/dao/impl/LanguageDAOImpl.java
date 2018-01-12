@@ -57,7 +57,7 @@ public class LanguageDAOImpl implements LanguageDAO {
 
 	@Override
 	public List<Language> findAll() {
-		String sql = "SELECT * FROM Language";
+		String sql = "SELECT * FROM Language ORDER BY language_id ASC";
 		List<Language> listLanguage = jdbcTemplate.query(sql, new LanguageMapper());
 		return listLanguage;
 	}
