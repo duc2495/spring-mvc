@@ -35,8 +35,12 @@ public class LanguageDAOImpl implements LanguageDAO {
 
 	@Override
 	public void update(Language language) {
-		String sql = "UPDATE Language SET language = ? WHERE language_id = " + language.getId() + "";
-		jdbcTemplate.update(sql, language.getName());
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", language.getId());
+		params.put("language", language.getName());
+		String sql = "UPDATE Language SET language = :language WHERE language_id = :id";
+		
+		namedParameterJdbcTemplate.update(sql, params);
 	}
 
 	@Override

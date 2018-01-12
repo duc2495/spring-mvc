@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,21 +65,25 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void delete(int id) {
-		String sql1 = "DELETE FROM CUSTOMER_LANGUAGE WHERE customer_id = " + id + "";
-		jdbcTemplate.update(sql1);
-		String sql2 = "DELETE FROM CUSTOMER WHERE customer_id = " + id + "";
-		jdbcTemplate.update(sql2);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		String sql1 = "DELETE FROM CUSTOMER_LANGUAGE WHERE customer_id = :id";
+		namedParameterJdbcTemplate.update(sql1, params);
+		String sql2 = "DELETE FROM CUSTOMER WHERE customer_id = :id";
+		namedParameterJdbcTemplate.update(sql2, params);
 
 	}
 
 	@Override
 	public Customer findByCustomerId(int id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
 		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
-				+ "FROM (SELECT * FROM CUSTOMER WHERE C.customer_id = " + id + ") C "
+				+ "FROM (SELECT * FROM CUSTOMER WHERE C.customer_id = :id ) C "
 				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
 				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
 				+ "ORDER BY C.customer_id";
-		List<Customer> customers = getCustomersBySql(sql);
+		List<Customer> customers = getCustomersBySql(sql, params);
 		return customers.get(0);
 	}
 
@@ -87,12 +92,15 @@ public class CustomerDAOImpl implements CustomerDAO {
 		if (offset == null) {
 			offset = 0;
 		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("maxResult", maxResult);
+		params.put("offset", offset);
 		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
-				+ "FROM (SELECT * FROM CUSTOMER LIMIT " + maxResult + " OFFSET " + offset + ") C "
+				+ "FROM (SELECT * FROM CUSTOMER LIMIT :maxResult OFFSET :offset ) C "
 				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
 				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
 				+ "ORDER BY C.customer_id";
-		return getCustomersBySql(sql);
+		return getCustomersBySql(sql, params);
 	}
 
 	@Override
@@ -103,24 +111,29 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public List<Customer> findAll() {
+		Map<String, Object> params = new HashMap<String, Object>();
 		String sql = "SELECT  C.customer_id, C.name, C.birthday, C.address, C.gender, C.school, C.school_year, L.language_id, L.language "
 				+ "FROM CUSTOMER C "
 				+ "LEFT JOIN (SELECT CL.customer_id, CL.language_id, L.language FROM CUSTOMER_LANGUAGE CL "
 				+ "INNER JOIN LANGUAGE L ON CL.language_id = L.language_id ) L ON C.customer_id = L.customer_id "
 				+ "ORDER BY C.customer_id";
-		return getCustomersBySql(sql);
+		return getCustomersBySql(sql, params);
 	}
 
-	public List<Customer> getCustomersBySql(String sql) {
+	public List<Customer> getCustomersBySql(String sql, Map<String, Object> params) {
 		List<Customer> customers = new ArrayList<Customer>();
 		List<Language> languages = new ArrayList<Language>();
 		List<Map<String, Object>> rows;
 		try {
-		rows = jdbcTemplate.queryForList(sql);
+			if (!params.isEmpty()) {
+				rows = namedParameterJdbcTemplate.queryForList(sql, params);
+			} else {
+				rows = jdbcTemplate.queryForList(sql);
+			}
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-		
+
 		Customer customer = new Customer();
 		int currentId = 0;
 
